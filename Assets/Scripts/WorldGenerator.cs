@@ -13,13 +13,15 @@ public class WorldGenerator : MonoBehaviour
 
     Queue<GameObject> activeChunks;
 
+    private Vector3 roadDirection { get => Vector3.forward; }
+
     private int currentChunk = 0;
     private Vector3 currentChunkPosition;
 
     private void Start()
     {
         activeChunks = new Queue<GameObject>();
-        currentChunkPosition = startPoint.position - Vector3.forward * (chunkLength / 2);
+        currentChunkPosition = startPoint.position - roadDirection * (chunkLength / 2);
         
         for(int i = 0; i < visibleChunks; i++)
         {
@@ -54,7 +56,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void LocateChunk(GameObject chunk)
     {
-        currentChunkPosition += Vector3.forward * chunkLength;
+        currentChunkPosition += roadDirection * chunkLength;
         chunk.transform.position = currentChunkPosition;
     }
 }
