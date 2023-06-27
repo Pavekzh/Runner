@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590b5b9577ca6b24abdd6b68218b65db, type: 3}
   m_Name: EmptyRoad
   m_EditorClassIdentifier: 
-  Presets: []
+  Presets:
+  - {fileID: 2023303610858457518, guid: fbbb06d6173836641bf5a537e87b1bff, type: 3}

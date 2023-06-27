@@ -29,5 +29,5 @@ public class DeathState:BaseState
     
     public override void Collision(Collision collision) { }
 
-
+    public override void EndRoll() { }
 }

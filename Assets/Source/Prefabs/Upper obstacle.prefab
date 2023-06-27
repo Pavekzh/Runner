@@ -51,6 +51,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5230653445850827200, guid: a67665ba09c6fa24fbba8ed54f05143d, type: 3}
+      propertyPath: m_Name
+      value: Upper obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230653445850827200, guid: a67665ba09c6fa24fbba8ed54f05143d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8910512909960102222, guid: a67665ba09c6fa24fbba8ed54f05143d, type: 3}
       propertyPath: m_Name
       value: Upper obstacle

@@ -18,7 +18,6 @@ public class StandState : BaseState
     {
         if (inputDetector.CheckStartInput())
             stateMachine.ChangeState(character.RunState);
-
     }
     
     public override void Run() { }
@@ -28,5 +27,7 @@ public class StandState : BaseState
     public override void Collision(Collision collision) { }
 
     public override void Revive() { }
+
+    public override void EndRoll() { }
 }
 

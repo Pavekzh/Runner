@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class JumpState:RunState
 {
@@ -7,6 +6,7 @@ public class JumpState:RunState
 
     public override void Enter()
     {
+        character.Jump.Jump();
         Debug.Log("JumpState enter");
     }
 
@@ -17,14 +17,17 @@ public class JumpState:RunState
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        throw new NotImplementedException();
+        if (inputDetector.CheckLeftInput())
+            character.Move.ChangeLaneLeft();
+        if (inputDetector.CheckRightInput())
+            character.Move.ChangeLaneRight();
+        inputDetector.CheckUpInput();
     }
 
-    public override void TriggerEnter(Collider trigger)
+    public override void Collision(Collision collision)
     {
-        if (trigger.gameObject.layer == character.Death.UpperObstacleLayer)
-        {
-            stateMachine.ChangeState(character.DeathState);
-        }
+        if (collision.collider.gameObject.layer == character.Jump.GroundLayer)
+            stateMachine.ChangeState(character.RunState);
     }
+
 }

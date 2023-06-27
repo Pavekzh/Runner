@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RunState : BaseState
 {
@@ -26,6 +25,10 @@ public class RunState : BaseState
             character.Move.ChangeLaneLeft();
         if (inputDetector.CheckRightInput())
             character.Move.ChangeLaneRight();
+        if (inputDetector.CheckDownInput())
+            stateMachine.ChangeState(character.RollState);
+        if (inputDetector.CheckUpInput())
+            stateMachine.ChangeState(character.JumpState);
     }
 
     public override void Collision(Collision collision) { }
@@ -43,5 +46,7 @@ public class RunState : BaseState
     }
 
     public override void Revive() { }
+
+    public override void EndRoll() { }
 }
 

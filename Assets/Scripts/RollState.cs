@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RollState:RunState
 {
@@ -7,14 +6,30 @@ public class RollState:RunState
 
     public override void Enter()
     {
-         Debug.Log("RollState enter");
+        character.Roll.Roll();
+        Debug.Log("RollState enter");
     }
 
     public override void Exit()
     {
+        character.Roll.StopRoll();
         Debug.Log("RollState exit");
     }
 
+    public override void EndRoll()
+    {
+        stateMachine.ChangeState(character.RunState);
+    }
+
+    public override void HandleInput(InputDetector inputDetector)
+    {
+        if (inputDetector.CheckLeftInput())
+            character.Move.ChangeLaneLeft();
+        if (inputDetector.CheckRightInput())
+            character.Move.ChangeLaneRight();
+        if (inputDetector.CheckUpInput())
+            stateMachine.ChangeState(character.JumpState);
+    }
 
     public override void TriggerEnter(Collider trigger)
     {
