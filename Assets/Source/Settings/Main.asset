@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 590b5b9577ca6b24abdd6b68218b65db, type: 3}
-  m_Name: ChunkPresets
+  m_Name: Main
   m_EditorClassIdentifier: 
   Presets:
-  - {fileID: 2023303610858457518, guid: 7778a7cc86dbc27479e12d1cadfa00f8, type: 3}
-  - {fileID: 2023303610858457518, guid: 222157384d8472f47bca45b033d3be6d, type: 3}
-  - {fileID: 2023303610858457518, guid: 0ac1ba32c2739e749b844e5e675aef66, type: 3}
+  - {fileID: 2023303610858457518, guid: fbbb06d6173836641bf5a537e87b1bff, type: 3}

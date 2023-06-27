@@ -8,6 +8,7 @@ public class DeathState:BaseState
     public override void Enter()
     {
         Debug.Log("Death enter");
+        character.Move.StopLaneChanging();
     }
 
     public override void Exit()

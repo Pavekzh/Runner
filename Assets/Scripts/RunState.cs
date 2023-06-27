@@ -7,8 +7,7 @@ public class RunState : BaseState
 
     public override void Run()
     {
-        float speed =  character.Move.Speed + character.Move.Acceleration * Time.deltaTime;
-        character.Move.Move(speed, character.Move.Direction);
+        character.Move.Move();
     }
 
     public override void Enter()
@@ -23,7 +22,10 @@ public class RunState : BaseState
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        throw new NotImplementedException();
+        if (inputDetector.CheckLeftInput())
+            character.Move.ChangeLaneLeft();
+        if (inputDetector.CheckRightInput())
+            character.Move.ChangeLaneRight();
     }
 
     public override void Collision(Collision collision) { }

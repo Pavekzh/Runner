@@ -15,10 +15,6 @@ public class RollState:RunState
         Debug.Log("RollState exit");
     }
 
-    public override void HandleInput(InputDetector inputDetector)
-    {
-        throw new NotImplementedException();
-    }
 
     public override void TriggerEnter(Collider trigger)
     {
