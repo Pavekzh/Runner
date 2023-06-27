@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 public abstract class BaseState
 {
     protected readonly Character character;
@@ -14,10 +15,11 @@ public abstract class BaseState
     public abstract void Exit();
 
     public abstract void Run();
-    public abstract void EarnItem();
 
-    public abstract void LowerCollision();
-    public abstract void UpperCollision();
+    public abstract void Revive();
+
+    public abstract void Collision(Collision collision);
+    public abstract void TriggerEnter(Collider trigger);
 
     public abstract void HandleInput(InputDetector inputDetector);
 

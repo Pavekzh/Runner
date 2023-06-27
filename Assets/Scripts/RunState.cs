@@ -7,13 +7,8 @@ public class RunState : BaseState
 
     public override void Run()
     {
-        float speed = character.Speed + character.Acceleration * Time.deltaTime;
-        character.Move(speed, character.Direction);
-    }
-
-    public override void EarnItem()
-    {
-        throw new NotImplementedException();
+        float speed =  character.Move.Speed + character.Move.Acceleration * Time.deltaTime;
+        character.Move.Move(speed, character.Move.Direction);
     }
 
     public override void Enter()
@@ -23,22 +18,28 @@ public class RunState : BaseState
 
     public override void Exit()
     {
-        throw new NotImplementedException();
+        Debug.Log("Run exit");
     }
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        Debug.Log("HandleInput - RunState");       
-    }
-
-    public override void LowerCollision()
-    {
         throw new NotImplementedException();
     }
 
-    public override void UpperCollision()
+    public override void Collision(Collision collision) { }
+
+    public override void TriggerEnter(Collider trigger)
     {
-        throw new NotImplementedException();
+        if(trigger.gameObject.layer == character.Death.LowerObstacleLayer)
+        {
+            stateMachine.ChangeState(character.DeathState);
+        }
+        else if(trigger.gameObject.layer == character.Death.UpperObstacleLayer)
+        {
+            stateMachine.ChangeState(character.DeathState);
+        }
     }
+
+    public override void Revive() { }
 }
 

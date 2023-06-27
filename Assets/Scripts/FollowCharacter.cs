@@ -8,7 +8,7 @@ public class FollowCharacter:MonoBehaviour
 
     private void Start()
     {
-        character.OnMoved += CharacterMoved;
+        character.Move.OnMoved += CharacterMoved;
     }
 
     private void CharacterMoved(Vector3 delta)

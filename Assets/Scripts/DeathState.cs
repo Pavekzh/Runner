@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class DeathState:BaseState
 {
@@ -6,24 +7,26 @@ public class DeathState:BaseState
 
     public override void Enter()
     {
-        throw new NotImplementedException();
+        Debug.Log("Death enter");
     }
 
     public override void Exit()
     {
-        throw new NotImplementedException();
+        Debug.Log("Death exit");
     }
 
-    public override void HandleInput(InputDetector inputDetector)
+    public override void HandleInput(InputDetector inputDetector) { }
+    
+    public override void Run() { }
+
+    public override void Revive()
     {
         throw new NotImplementedException();
     }
 
-    public override void LowerCollision() { }
-
-    public override void UpperCollision() { }
+    public override void TriggerEnter(Collider trigger) { }   
     
-    public override void Run() { }
+    public override void Collision(Collision collision) { }
 
-    public override void EarnItem() { }
+
 }
