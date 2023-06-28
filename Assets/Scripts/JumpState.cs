@@ -17,11 +17,12 @@ public class JumpState:RunState
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        if (inputDetector.CheckLeftInput())
-            character.Move.ChangeLaneLeft();
-        if (inputDetector.CheckRightInput())
+        Vector2 input = inputDetector.CheckInputDirection();
+
+        if (input.x == 1)
             character.Move.ChangeLaneRight();
-        inputDetector.CheckUpInput();
+        if (input.x == -1)
+            character.Move.ChangeLaneLeft();
     }
 
     public override void Collision(Collision collision)

@@ -16,7 +16,7 @@ public class StandState : BaseState
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        if (inputDetector.CheckStartInput())
+        if (inputDetector.CheckAnyInput())
             stateMachine.ChangeState(character.RunState);
     }
     

@@ -2,9 +2,6 @@
 
 public abstract class InputDetector:MonoBehaviour
 {
-    public abstract bool CheckStartInput();
-    public abstract bool CheckUpInput();
-    public abstract bool CheckDownInput();
-    public abstract bool CheckLeftInput();
-    public abstract bool CheckRightInput();
+    public abstract Vector2 CheckInputDirection();
+    public abstract bool CheckAnyInput();
 }

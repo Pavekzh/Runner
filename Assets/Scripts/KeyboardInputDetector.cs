@@ -2,44 +2,43 @@
 
 public class KeyboardInputDetector : InputDetector
 {
-    [SerializeField]private float keepInputUpTime = 0.3f;
+    [SerializeField] private bool saveInputUp = true;
+    [SerializeField] private float saveInputUpTime = 0.3f;
 
-    private const string startKey = "w";
     private const string upKey = "w";
     private const string downKey = "s";
     private const string leftKey = "a";
     private const string rightKey = "d";
 
-    private float lastTimeUpInput = -1;
+    private float savedInputUpTime = -1;
 
-    public override bool CheckStartInput()
+    public override bool CheckAnyInput()
     {
-        return Input.GetKeyDown(startKey);
+        return Input.anyKeyDown;
     }
 
-    public override bool CheckDownInput()
+    public override Vector2 CheckInputDirection()
     {
-        return Input.GetKeyDown(downKey);
+        if (Input.GetKeyDown(rightKey))
+            return Vector2.right;
+        else if (Input.GetKeyDown(leftKey))
+            return Vector2.left;
+        else if (CheckUpInput())
+            return Vector2.up;
+        else if (Input.GetKeyDown(downKey))
+            return Vector2.down;
+        else
+            return Vector2.zero;
     }
 
-    public override bool CheckLeftInput()
-    {
-        return Input.GetKeyDown(leftKey);
-    }
-
-    public override bool CheckRightInput()
-    {
-        return Input.GetKeyDown(rightKey);
-    }
-
-    public override bool CheckUpInput()
+    public bool CheckUpInput()
     {
         if (Input.GetKeyDown(upKey))
         {
-            lastTimeUpInput = Time.realtimeSinceStartup;
+            savedInputUpTime = Time.realtimeSinceStartup;
             return true;
         }
-        else if (Time.realtimeSinceStartup - lastTimeUpInput < keepInputUpTime)
+        else if (saveInputUp && Time.realtimeSinceStartup - savedInputUpTime < saveInputUpTime)
             return true;
         else return false;
     }

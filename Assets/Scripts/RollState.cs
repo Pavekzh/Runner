@@ -23,11 +23,13 @@ public class RollState:RunState
 
     public override void HandleInput(InputDetector inputDetector)
     {
-        if (inputDetector.CheckLeftInput())
-            character.Move.ChangeLaneLeft();
-        if (inputDetector.CheckRightInput())
+        Vector2 input = inputDetector.CheckInputDirection();
+
+        if (input.x == 1)
             character.Move.ChangeLaneRight();
-        if (inputDetector.CheckUpInput())
+        if (input.x == -1)
+            character.Move.ChangeLaneLeft();
+        if (input.y == 1)
             stateMachine.ChangeState(character.JumpState);
     }
 

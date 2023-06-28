@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 182302078}
   - component: {fileID: 182302084}
   - component: {fileID: 182302085}
+  - component: {fileID: 182302090}
   - component: {fileID: 182302086}
   - component: {fileID: 182302087}
   - component: {fileID: 182302088}
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0943159935f528f4b82ff5da05864851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDetector: {fileID: 182302085}
+  inputDetector: {fileID: 182302090}
   move: {fileID: 182302087}
   death: {fileID: 182302088}
   jump: {fileID: 182302089}
@@ -267,6 +268,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer: 8
   Power: 5.5
+--- !u!114 &182302090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182302077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df16b1cd4ee3bb643aa361b835ef8809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swipeTreshold: 0.2
 --- !u!1 &309924958
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChunksParent: {fileID: 1159660559}
-  presets: {fileID: 11400000, guid: 5f787e0cc4c52714ba7c5394dc66a140, type: 2}
+  presets: {fileID: 11400000, guid: 73d5d9bb965bc8944aead722746ccafb, type: 2}
 --- !u!114 &1398830131
 MonoBehaviour:
   m_ObjectHideFlags: 0
