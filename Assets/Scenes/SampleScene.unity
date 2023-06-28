@@ -205,7 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16c3263e999bc14b8e7953660025863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepInputUpTime: 0.3
+  saveInputUp: 1
+  saveInputUpTime: 0.3
 --- !u!114 &182302086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df16b1cd4ee3bb643aa361b835ef8809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swipeTreshold: 0.2
+  swipeTreshold: 0.05
+  saveInputUp: 1
+  saveInputUpTime: 0.3
 --- !u!1 &309924958
 GameObject:
   m_ObjectHideFlags: 0
