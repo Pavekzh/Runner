@@ -3,22 +3,23 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class SignUpController:MonoBehaviour
+public class LogInController:MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private TMP_InputField email;
-    [SerializeField] private TMP_InputField username;
     [SerializeField] private TMP_InputField password;
-    [SerializeField] private TMP_InputField repeatPassword;
+
     [Header("Actions")]
-    [SerializeField] private LogInController logInController;
-    [SerializeField] private MessageController messenger;
+    [SerializeField] private SignUpController signUpController;
+    [SerializeField] private MessageController messenger;        
+    [SerializeField] private GameObject panel;
     [SerializeField] private Toggle remindMe;
     [SerializeField] private Button signUp;
     [SerializeField] private Button logIn;
 
     public void Open()
     {
+        panel.SetActive(true);
         gameObject.SetActive(true);
     }
 
@@ -29,48 +30,42 @@ public class SignUpController:MonoBehaviour
 
     private void Start()
     {
-        logIn.onClick.AddListener(LogIn);
+        panel.SetActive(false);
+        if (PlayerPrefs.GetString(Authentication.AuthDataKey) == "")
+            SignUp();
+        else
+        {
+            if (PlayerPrefs.GetInt(Authentication.RemindMeKey) == 1)
+                Authentication.Instance.SilentLogin(StartGame, LoginError);
+            else
+                panel.SetActive(true);
+        }
+
+
         signUp.onClick.AddListener(SignUp);
+        logIn.onClick.AddListener(LogIn);
+    }
+
+
+    private void LogIn()
+    {
+        AuthData authData = new AuthData()
+        {
+            Email = email.text,
+            Password = password.text
+        };
+
+        Authentication.Instance.LogIn(authData, SuccessefullyLogin, LoginError);
     }
 
     private void SignUp()
     {
-        if(!CheckEmail.IsEmail(email.text))
-        {
-            messenger.ShowMessage("Error", "Email unvalid");
-            return;
-        }
-
-        if(password.text != repeatPassword.text)
-        {
-            messenger.ShowMessage("Error", "Passwords not equal");
-            return;
-        }
-
-        if(username.text == "")
-        {
-            messenger.ShowMessage("Error", "Username can`t be empty");
-            return;
-        }
-
-        AuthData authData = new AuthData()
-        {
-            Email = email.text,
-            Username = username.text,
-            Password = password.text
-        };
-
-        Authentication.Instance.SignUp(authData, SuccessefullySignUp, ErrorSignUp);     
-    }
-
-    private void LogIn()
-    {
         this.Close();
-        logInController.Open();
+        signUpController.Open();
     }
 
-    private void SuccessefullySignUp()
-    {
+    private void SuccessefullyLogin()
+    {      
         if (remindMe.isOn)
             PlayerPrefs.SetInt(Authentication.RemindMeKey, 1);
         else
@@ -79,9 +74,10 @@ public class SignUpController:MonoBehaviour
         StartGame();
     }
 
-    private void ErrorSignUp(string message)
+    private void LoginError(string message)
     {
         messenger.ShowMessage("Error", message);
+        panel.SetActive(true);
     }
 
     private void StartGame()
@@ -89,7 +85,4 @@ public class SignUpController:MonoBehaviour
         Debug.LogError("Scene loading should be rewritten");
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
-
-
-
 }
