@@ -10,20 +10,38 @@ public class GameOverController:MonoBehaviour
     [SerializeField] private TMP_Text scoreField;
     [SerializeField] private TMP_Text coinsField;
     [SerializeField] private Button revive;
-    [SerializeField] private Button retry;
+    [SerializeField] private Button menu;
 
-    public Action OnRevive;
+    private Action onRevive;
 
-    private bool canBeRevived = true;
+    private PlayerProfile playerProfile;
+
+    private bool canBeRevived = true;    
+    private int score;
+    private int coins;
+
+    public void InitDependecies(PlayerProfile playerProfile)
+    {
+        this.playerProfile = playerProfile;
+    }
 
     private void Start()
     {
         revive.onClick.AddListener(ReviveClick);
-        retry.onClick.AddListener(RetryClick);
+        menu.onClick.AddListener(Menu);
     }
 
-    public void Execute(int score, int coins,bool canBeRevived)
-    {        
+
+    public void Open(int score, int coins, bool canBeRevived,Action onRevive)
+    {
+        this.onRevive = onRevive;
+        Open(score, coins, canBeRevived);
+    }
+
+    public void Open(int score, int coins,bool canBeRevived)
+    {
+        this.score = score;
+        this.coins = coins;
         this.canBeRevived = canBeRevived;
 
         Open();
@@ -31,7 +49,12 @@ public class GameOverController:MonoBehaviour
         coinsField.text = coins.ToString();
 
     }    
-    
+        
+    public void Close()
+    {
+        panel.gameObject.SetActive(false);
+    }
+
     private void Open()
     {
         DeactivateReviveButton();
@@ -41,10 +64,7 @@ public class GameOverController:MonoBehaviour
             Advertisements.Instance.LoadRewarded(ActivateReviveButton, ShowError);
     }
 
-    private void Close()
-    {
-        panel.gameObject.SetActive(false);
-    }
+
 
     private void DeactivateReviveButton()
     {
@@ -63,8 +83,7 @@ public class GameOverController:MonoBehaviour
 
     private void Revive()
     {
-        OnRevive?.Invoke();
-        this.Close();
+        onRevive?.Invoke();
     }
 
     private void ReviveClick()
@@ -72,8 +91,10 @@ public class GameOverController:MonoBehaviour
         Advertisements.Instance.ShowRewarded(Revive, ShowError);
     }
 
-    private void RetryClick()
+    private void Menu()
     {
+        playerProfile.SaveScore(score);
+        playerProfile.AddCoins(coins);
         throw new NotImplementedException();
     }
 }

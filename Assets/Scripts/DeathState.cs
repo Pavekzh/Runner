@@ -8,14 +8,13 @@ public class DeathState:BaseState
     public override void Enter()
     {
         Debug.Log("Death enter");
-        character.Death.OnRevived += Revive;
-        character.Death.Die((int)character.DistanceCounter.Distance, character.Items.Coins);
+        character.Death.Die();
+        character.UISwitcher.OpenGameOver(character.ScoreCounter.Score, character.Items.Coins, character.Death.CanBeRevived,Revive);
         character.Move.StopLaneChanging();
     }
 
     public override void Exit()
     {
-        character.Death.OnRevived -= Revive;
         Debug.Log("Death exit");
     }
 
@@ -32,5 +31,6 @@ public class DeathState:BaseState
     {        
         stateMachine.ChangeState(character.InvulnerableState);        
         character.Move.InstantGetInLane();
+        character.UISwitcher.OpenInRunUI();
     }
 }

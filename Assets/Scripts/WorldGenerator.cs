@@ -3,20 +3,25 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] int visibleChunks = 5;
-    [SerializeField] float chunkLength = 10;
-    [SerializeField] float setUnvisibleOffset = 1;
-    [SerializeField] Transform startPoint;
+    [SerializeField] private int visibleChunks = 5;
+    [SerializeField] private float chunkLength = 10;
+    [SerializeField] private float setUnvisibleOffset = 1;
+    [SerializeField] private Transform startPoint;
 
-    [SerializeField] ChunkObjectPool chunkPool;
-    [SerializeField] RunDistanceCounter distanceCounter;
+    [SerializeField] private ChunkObjectPool chunkPool;
 
-    Queue<GameObject> activeChunks;
+    private ScoreCounter scoreCounter;
+    private Queue<GameObject> activeChunks;
 
     private Vector3 roadDirection { get => Vector3.forward; }
 
     private int currentChunk = 0;
     private Vector3 currentChunkPosition;
+
+    public void InitDependecies(ScoreCounter scoreCounter)
+    {
+        this.scoreCounter = scoreCounter;
+    }
 
     private void Start()
     {
@@ -32,7 +37,7 @@ public class WorldGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (currentChunk != (int)((distanceCounter.Distance - setUnvisibleOffset) / chunkLength))
+        if (currentChunk != (int)((scoreCounter.RawDistance - setUnvisibleOffset) / chunkLength))
         {
             currentChunk++;
             RemoveUnvisibleChunk();

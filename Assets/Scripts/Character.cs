@@ -8,13 +8,16 @@ public class Character:MonoBehaviour
     [SerializeField] private CharacterRoll roll;
     [SerializeField] private CharacterItems items;
     [SerializeField] private CharacterInvulnerability invulnerability;
-    
+    [SerializeField] private UISwitcher uiSwitcher;
+
     private InputDetector inputDetector;
-    private RunDistanceCounter distanceCounter;
+    private ScoreCounter scoreCounter;
     private StateMachine stateMachine;
 
-    public RunDistanceCounter DistanceCounter { get => distanceCounter; }
 
+    public ScoreCounter ScoreCounter { get => scoreCounter; }
+
+    public UISwitcher UISwitcher { get => uiSwitcher; }
     public CharacterDeath Death { get => death; }
     public CharacterMove Move { get => move; }
     public CharacterJump Jump { get => jump; }
@@ -29,10 +32,10 @@ public class Character:MonoBehaviour
     public StandState StandState { get; private set; }
     public InvulnerableState InvulnerableState { get; private set; }
 
-    public void InitDependecies(InputDetector inputDetector,RunDistanceCounter distanceCounter)
+    public void InitDependecies(InputDetector inputDetector,ScoreCounter scoreCounter)
     {
         this.inputDetector = inputDetector;
-        this.distanceCounter = distanceCounter;
+        this.scoreCounter = scoreCounter;
     }
 
     private void Start()

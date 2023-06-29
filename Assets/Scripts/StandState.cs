@@ -12,6 +12,7 @@ public class StandState : BaseState
     public override void Exit() 
     {
         Debug.Log("Stand exit");
+        character.UISwitcher.OpenInRunUI();
     }
 
     public override void HandleInput(InputDetector inputDetector)

@@ -2,29 +2,61 @@
 
 class Bootstrap:MonoBehaviour
 {
-    [Header("Dependencies")]
+    [Header("Systems")]
     [SerializeField] InputDetector inputDetector;
-    [SerializeField] RunDistanceCounter distanceCounter;
-    [SerializeField] GameOverController gameOverController;
-    [Header("Dependent")]
+    [SerializeField] ScoreCounter scoreCounter;    
+    [SerializeField] WorldGenerator worldGenerator;
+    [SerializeField] PlayerProfile playerProfile;
+
+    [Header("Character")]    
     [SerializeField] Character character;
-    [SerializeField] CharacterDeath characterDeath;
+    [SerializeField] UISwitcher uiSwitcher;
+
+    [Header("UI")]    
+    [SerializeField] InRunUIController inRunUI;
+    [SerializeField] GameOverController gameOver;
+    [SerializeField] MainMenuController mainMenu;
 
 
     private void Awake()
-    {        
-        BootstrapCharacter();
-        BootstrapCharacterDeath();
+    {                
+        BootstrapWorldGenerator();
 
+        BootstrapMainMenu();
+        BootstrapInRunUI();
+        BootstrapGameOver();        
+        
+        BootstrapCharacter();
+        BootstrapUISwitcher();
+    }
+
+    private void BootstrapWorldGenerator()
+    {
+        worldGenerator.InitDependecies(scoreCounter);
+    }
+
+    private void BootstrapMainMenu()
+    {
+        mainMenu.InitDependencies(playerProfile);
+    }
+
+    private void BootstrapInRunUI()
+    {
+        inRunUI.InitDependencies(scoreCounter);
+    }    
+    
+    private void BootstrapGameOver()
+    {
+        gameOver.InitDependecies(playerProfile);
     }
 
     private void BootstrapCharacter()
     {
-        character.InitDependecies(inputDetector, distanceCounter);
+        character.InitDependecies(inputDetector, scoreCounter);
     }
 
-    private void BootstrapCharacterDeath()
+    private void BootstrapUISwitcher()
     {
-        characterDeath.InitDependecies(gameOverController);
+        uiSwitcher.InitDependencies(mainMenu, inRunUI, gameOver);
     }
 }
