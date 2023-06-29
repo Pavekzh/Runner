@@ -7,6 +7,7 @@ public class Character:MonoBehaviour
     [SerializeField] private CharacterJump jump;
     [SerializeField] private CharacterRoll roll;
     [SerializeField] private CharacterItems items;
+    [SerializeField] private CharacterInvulnerability invulnerability;
     
     private InputDetector inputDetector;
     private RunDistanceCounter distanceCounter;
@@ -19,12 +20,14 @@ public class Character:MonoBehaviour
     public CharacterJump Jump { get => jump; }
     public CharacterRoll Roll { get => roll; }
     public CharacterItems Items { get => items; }
+    public CharacterInvulnerability Invulnerability { get => invulnerability; }
 
     public RunState RunState { get; private set; }
     public RollState RollState { get; private set; }
     public JumpState JumpState { get; private set; }
     public DeathState DeathState { get; private set; }
     public StandState StandState { get; private set; }
+    public InvulnerableState InvulnerableState { get; private set; }
 
     public void InitDependecies(InputDetector inputDetector,RunDistanceCounter distanceCounter)
     {
@@ -34,8 +37,6 @@ public class Character:MonoBehaviour
 
     private void Start()
     {
-        roll.OnRollEnd += RollEnd;
-
         stateMachine = new StateMachine();
 
         RunState = new RunState(this, stateMachine);
@@ -43,13 +44,9 @@ public class Character:MonoBehaviour
         JumpState = new JumpState(this, stateMachine);
         DeathState = new DeathState(this, stateMachine);
         StandState = new StandState(this, stateMachine);
+        InvulnerableState = new InvulnerableState(this, stateMachine);
 
         stateMachine.Init(StandState);
-    }
-
-    private void RollEnd()
-    {
-        stateMachine.CurrentState.EndRoll();
     }
 
     private void Update()

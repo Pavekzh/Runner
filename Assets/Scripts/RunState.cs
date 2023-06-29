@@ -46,9 +46,5 @@ public class RunState : BaseState
             stateMachine.ChangeState(character.DeathState);
         }
     }
-
-    public override void Revive() { }
-
-    public override void EndRoll() { }
 }
 

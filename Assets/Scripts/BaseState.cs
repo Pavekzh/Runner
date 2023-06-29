@@ -16,10 +16,6 @@ public abstract class BaseState
 
     public abstract void Run();
 
-    public abstract void Revive();
-
-    public abstract void EndRoll();
-
     public abstract void Collision(Collision collision);
     public abstract void TriggerEnter(Collider trigger);
 

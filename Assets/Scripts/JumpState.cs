@@ -27,7 +27,12 @@ public class JumpState:RunState
 
     public override void Collision(Collision collision)
     {
-        if (collision.collider.gameObject.layer == character.Jump.GroundLayer)
+        LayerMask layerMask = character.Jump.GroundLayers;
+        int layer = collision.collider.gameObject.layer;
+
+        bool isColliderGround = layerMask == (layerMask | (1 << layer));
+
+        if (isColliderGround)
             stateMachine.ChangeState(character.RunState);
     }
 

@@ -2,10 +2,10 @@
 
 public class CharacterJump:MonoBehaviour
 {
-    [SerializeField] private int groundLayer;
+    [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float Power = 5;
 
-    public int GroundLayer { get => groundLayer; }
+    public LayerMask GroundLayers { get => groundLayers; }
 
     private new Rigidbody rigidbody;
 

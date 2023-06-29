@@ -7,18 +7,15 @@ public class RollState:RunState
     public override void Enter()
     {
         character.Roll.Roll();
+        character.Roll.OnRollEnd += EndRoll;
         Debug.Log("RollState enter");
     }
 
     public override void Exit()
     {
         character.Roll.StopRoll();
+        character.Roll.OnRollEnd -= EndRoll;
         Debug.Log("RollState exit");
-    }
-
-    public override void EndRoll()
-    {
-        stateMachine.ChangeState(character.RunState);
     }
 
     public override void HandleInput(InputDetector inputDetector)
@@ -39,6 +36,13 @@ public class RollState:RunState
         {
             stateMachine.ChangeState(character.DeathState);
         }
+    }    
+    
+    
+    private void EndRoll()
+    {
+        stateMachine.ChangeState(character.RunState);
     }
+
 }
 

@@ -8,12 +8,14 @@ public class DeathState:BaseState
     public override void Enter()
     {
         Debug.Log("Death enter");
+        character.Death.OnRevived += Revive;
         character.Death.Die((int)character.DistanceCounter.Distance, character.Items.Coins);
         character.Move.StopLaneChanging();
     }
 
     public override void Exit()
     {
+        character.Death.OnRevived -= Revive;
         Debug.Log("Death exit");
     }
 
@@ -21,14 +23,14 @@ public class DeathState:BaseState
     
     public override void Run() { }
 
-    public override void Revive()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void TriggerEnter(Collider trigger) { }   
     
-    public override void Collision(Collision collision) { }
-
-    public override void EndRoll() { }
+    public override void Collision(Collision collision) { }   
+    
+    
+    private void Revive()
+    {        
+        stateMachine.ChangeState(character.InvulnerableState);        
+        character.Move.InstantGetInLane();
+    }
 }
