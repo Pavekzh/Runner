@@ -8,6 +8,7 @@ public class DeathState:BaseState
     public override void Enter()
     {
         Debug.Log("Death enter");
+        character.Death.Die((int)character.DistanceCounter.Distance, character.Items.Coins);
         character.Move.StopLaneChanging();
     }
 

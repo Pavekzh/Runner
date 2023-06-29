@@ -2,24 +2,35 @@
 
 public class Character:MonoBehaviour
 {
-    [SerializeField] private InputDetector inputDetector;
     [SerializeField] private CharacterMove move;
     [SerializeField] private CharacterDeath death;
     [SerializeField] private CharacterJump jump;
     [SerializeField] private CharacterRoll roll;
+    [SerializeField] private CharacterItems items;
+    
+    private InputDetector inputDetector;
+    private RunDistanceCounter distanceCounter;
+    private StateMachine stateMachine;
+
+    public RunDistanceCounter DistanceCounter { get => distanceCounter; }
 
     public CharacterDeath Death { get => death; }
     public CharacterMove Move { get => move; }
     public CharacterJump Jump { get => jump; }
     public CharacterRoll Roll { get => roll; }
-
-    private StateMachine stateMachine;
+    public CharacterItems Items { get => items; }
 
     public RunState RunState { get; private set; }
     public RollState RollState { get; private set; }
     public JumpState JumpState { get; private set; }
     public DeathState DeathState { get; private set; }
     public StandState StandState { get; private set; }
+
+    public void InitDependecies(InputDetector inputDetector,RunDistanceCounter distanceCounter)
+    {
+        this.inputDetector = inputDetector;
+        this.distanceCounter = distanceCounter;
+    }
 
     private void Start()
     {
@@ -55,6 +66,5 @@ public class Character:MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         stateMachine.CurrentState.Collision(collision);
-    }
-
+    }   
 }
