@@ -10,12 +10,24 @@ public class SignUpController:MonoBehaviour
     [SerializeField] private TMP_InputField username;
     [SerializeField] private TMP_InputField password;
     [SerializeField] private TMP_InputField repeatPassword;
+
     [Header("Actions")]
-    [SerializeField] private LogInController logInController;
-    [SerializeField] private MessageController messenger;
     [SerializeField] private Toggle remindMe;
     [SerializeField] private Button signUp;
     [SerializeField] private Button logIn;
+
+    private LogInController logInController;
+    private MessageController messenger;
+    private Authentication authentication;
+    private SceneLoader sceneLoader;
+
+    public void InitDependencies(Authentication authentication, LogInController login, MessageController messenger,SceneLoader sceneLoader)
+    {
+        this.authentication = authentication;
+        this.logInController = login;
+        this.messenger = messenger;
+        this.sceneLoader = sceneLoader;
+    }
 
     public void Open()
     {
@@ -60,7 +72,7 @@ public class SignUpController:MonoBehaviour
             Password = password.text
         };
 
-        Authentication.Instance.SignUp(authData, SuccessefullySignUp, ErrorSignUp);     
+        authentication.SignUp(authData, SuccessefullySignUp, ErrorSignUp);     
     }
 
     private void LogIn()
@@ -86,8 +98,7 @@ public class SignUpController:MonoBehaviour
 
     private void StartGame()
     {
-        Debug.LogError("Scene loading should be rewritten");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        sceneLoader.LoadGame();
     }
 
 

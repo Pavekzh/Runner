@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
-class Bootstrap:MonoBehaviour
+class GameBootstrap:MonoBehaviour
 {
     [Header("Systems")]
     [SerializeField] InputDetector inputDetector;
     [SerializeField] ScoreCounter scoreCounter;    
     [SerializeField] WorldGenerator worldGenerator;
     [SerializeField] PlayerProfile playerProfile;
+    [SerializeField] SceneLoader sceneLoader;
 
     [Header("Character")]    
     [SerializeField] Character character;
@@ -48,7 +49,7 @@ class Bootstrap:MonoBehaviour
     
     private void BootstrapGameOver()
     {
-        gameOver.InitDependecies(playerProfile);
+        gameOver.InitDependecies(playerProfile,sceneLoader);
     }
 
     private void BootstrapCharacter()

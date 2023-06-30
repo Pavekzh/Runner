@@ -9,23 +9,37 @@ public class LogInController:MonoBehaviour
     [SerializeField] private TMP_InputField email;
     [SerializeField] private TMP_InputField password;
 
-    [Header("Actions")]
-    [SerializeField] private SignUpController signUpController;
-    [SerializeField] private MessageController messenger;        
+    [Header("Actions")] 
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject title;
     [SerializeField] private Toggle remindMe;
     [SerializeField] private Button signUp;
     [SerializeField] private Button logIn;
+
+    private Authentication authentication;
+    private SignUpController signUpController;
+    private MessageController messenger;
+    private SceneLoader sceneLoader;
+
+    public void InitDependencies(Authentication authentication,SignUpController signUp,MessageController messenger,SceneLoader sceneLoader)
+    {        
+        this.authentication = authentication;
+        this.signUpController = signUp;
+        this.messenger = messenger;
+        this.sceneLoader = sceneLoader;
+    }
 
     public void Open()
     {
         panel.SetActive(true);
         gameObject.SetActive(true);
+        title.SetActive(true);
     }
 
     public void Close()
     {
         gameObject.SetActive(false);
+        title.SetActive(false);
     }
 
     private void Start()
@@ -36,7 +50,7 @@ public class LogInController:MonoBehaviour
         else
         {
             if (PlayerPrefs.GetInt(Authentication.RemindMeKey) == 1)
-                Authentication.Instance.SilentLogin(StartGame, LoginError);
+                authentication.SilentLogin(StartGame, LoginError);
             else
                 panel.SetActive(true);
         }
@@ -55,7 +69,7 @@ public class LogInController:MonoBehaviour
             Password = password.text
         };
 
-        Authentication.Instance.LogIn(authData, SuccessefullyLogin, LoginError);
+        authentication.LogIn(authData, SuccessefullyLogin, LoginError);
     }
 
     private void SignUp()
@@ -82,7 +96,6 @@ public class LogInController:MonoBehaviour
 
     private void StartGame()
     {
-        Debug.LogError("Scene loading should be rewritten");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        sceneLoader.LoadGame();
     }
 }

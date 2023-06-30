@@ -15,20 +15,25 @@ public class GameOverController:MonoBehaviour
     private Action onRevive;
 
     private PlayerProfile playerProfile;
+    private SceneLoader sceneLoader;
+
+    private bool scoreSaved = false;
+    private bool coinsSaved = false;
 
     private bool canBeRevived = true;    
     private int score;
     private int coins;
 
-    public void InitDependecies(PlayerProfile playerProfile)
+    public void InitDependecies(PlayerProfile playerProfile,SceneLoader sceneLoader)
     {
         this.playerProfile = playerProfile;
+        this.sceneLoader = sceneLoader;
     }
 
     private void Start()
     {
         revive.onClick.AddListener(ReviveClick);
-        menu.onClick.AddListener(Menu);
+        menu.onClick.AddListener(MenuClick);
     }
 
 
@@ -86,15 +91,33 @@ public class GameOverController:MonoBehaviour
         onRevive?.Invoke();
     }
 
+    private void Menu()
+    {
+        if (scoreSaved && coinsSaved)
+            sceneLoader.LoadGame();
+    }
+
     private void ReviveClick()
     {
         Advertisements.Instance.ShowRewarded(Revive, ShowError);
     }
 
-    private void Menu()
+    private void MenuClick()
     {
-        playerProfile.SaveScore(score);
-        playerProfile.AddCoins(coins);
-        throw new NotImplementedException();
+        playerProfile.SaveScore(score,ScoreSaved);
+        playerProfile.AddCoins(coins,CoinsSaved);
+        menu.interactable = false;
+        revive.interactable = false;
+    }
+
+    private void ScoreSaved()
+    {
+        scoreSaved = true;
+        Menu();
+    }
+    private void CoinsSaved()
+    {
+        coinsSaved = true;
+        Menu();
     }
 }

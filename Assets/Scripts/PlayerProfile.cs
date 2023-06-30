@@ -22,6 +22,10 @@ public class PlayerProfile:MonoBehaviour
     private Action<int> onCoinsGot;
     private Action<string> onUsernameGot;
 
+    private Action onSavedScore;
+    private Action onAddedCoins;
+    private Action onTakedCoins;
+
     public void GetBestScore(Action<int> setResult)
     {
         if (isUserDataLoaded)
@@ -62,15 +66,43 @@ public class PlayerProfile:MonoBehaviour
 
     }
 
+    public void SaveScore(int score, Action onComplete)
+    {        
+        onSavedScore = onComplete;
+        SaveScore(score);
+
+    }
+
+    public void AddCoins(int coins, Action onComplete)
+    {        
+        onAddedCoins = onComplete;
+        AddCoins(coins);
+
+    }
+
+    public bool TakeCoins(int coins,Action onComplete)
+    {        
+        onTakedCoins = onComplete;
+        return TakeCoins(coins);
+    }
+
     public void SaveScore(int score)
     {
-        if(score > this.bestScore)
+        if (score > this.bestScore)
         {
             this.bestScore = score;
             Dictionary<string, string> data = new Dictionary<string, string>() { { BestScoreKey, score.ToString() } };
             UpdateUserDataRequest request = new UpdateUserDataRequest() { Data = data };
-            PlayFabClientAPI.UpdateUserData(request, result => Succes("saving score"), error => Error(error.ErrorMessage));
+            PlayFabClientAPI.UpdateUserData(request,
+                result =>
+                {
+                    onSavedScore?.Invoke();
+                    Succes("saving score");
+                },
+                error => Error(error.ErrorMessage));
         }
+        else
+            onSavedScore?.Invoke();
     }
 
     public void AddCoins(int coins)
@@ -78,19 +110,34 @@ public class PlayerProfile:MonoBehaviour
         this.coins += coins;
         Dictionary<string, string> data = new Dictionary<string, string>() { { CoinsKey, this.coins.ToString() } };
         UpdateUserDataRequest request = new UpdateUserDataRequest() { Data = data };
-        PlayFabClientAPI.UpdateUserData(request, result => Succes("adding coins"), error => Error(error.ErrorMessage));
+        PlayFabClientAPI.UpdateUserData(request,
+                result =>
+                {
+                    onAddedCoins?.Invoke();
+                    Succes("adding coins");
+                },
+                error => Error(error.ErrorMessage));
     }
 
-    public void TakeCoins(int coins)
+    public bool TakeCoins(int coins)
     {
         if (this.coins < coins)
-            return;
+            return false;
 
         this.coins -= coins;
         Dictionary<string, string> data = new Dictionary<string, string>() { { CoinsKey, coins.ToString() } };
         UpdateUserDataRequest request = new UpdateUserDataRequest() { Data = data };
-        PlayFabClientAPI.UpdateUserData(request, result => Succes("taking coins"), error => Error(error.ErrorMessage));
+        PlayFabClientAPI.UpdateUserData(request,
+                result =>
+                {
+                    onTakedCoins?.Invoke();
+                    Succes("taking coins");
+                },
+                error => Error(error.ErrorMessage));
+
+        return true;
     }
+
 
     private void LoadUserData()
     {

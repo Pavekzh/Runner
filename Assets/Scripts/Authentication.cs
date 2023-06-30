@@ -5,18 +5,8 @@ using PlayFab.ClientModels;
 
 public class Authentication:MonoBehaviour
 {
-    public static Authentication Instance { get; private set; }
-
     public const string RemindMeKey = "RemindMe";
     public const string AuthDataKey = "AuthData";
-
-    private void Awake()
-    {
-        if (Instance != null)
-            Debug.LogError("Second instance of Authentication: " + gameObject.name);
-        else
-            Instance = this;
-    }
 
     public void SilentLogin(Action onComplete, Action<string> onError)
     {
