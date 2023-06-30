@@ -6,11 +6,13 @@ using PlayFab.ClientModels;
 
 public class PlayerProfile:MonoBehaviour
 {
-    private const string BestScoreKey = "BestScore";
     private const string CoinsKey = "Coins";
+    private const string BestScoreStatisticName = "BestScore";
 
     private bool isUserDataLoading = false;
     private bool isUserProfileLoading = false;
+    private bool isUserStatsLoading = false;
+    private bool isUserStatsLoaded = false;
     private bool isUserDataLoaded = false;
     private bool isUserProfileLoaded = false;
 
@@ -28,14 +30,14 @@ public class PlayerProfile:MonoBehaviour
 
     public void GetBestScore(Action<int> setResult)
     {
-        if (isUserDataLoaded)
+        if (isUserStatsLoaded)
             setResult(bestScore);
         else
         {
-            if(!isUserDataLoading)
-                LoadUserData();
+            if(!isUserStatsLoading)
+                LoadUserStats();
 
-            onBestScoreGot = setResult;
+            onBestScoreGot += setResult;
         }
 
     }
@@ -49,7 +51,7 @@ public class PlayerProfile:MonoBehaviour
             if (!isUserDataLoading)
                 LoadUserData();
 
-            onCoinsGot = setResult;
+            onCoinsGot += setResult;
         }
     }
 
@@ -61,10 +63,11 @@ public class PlayerProfile:MonoBehaviour
         {
             if(!isUserProfileLoading)
                 LoadUserProfile();
-            onUsernameGot = setResult;
+            onUsernameGot += setResult;
         }
 
     }
+
 
     public void SaveScore(int score, Action onComplete)
     {        
@@ -91,9 +94,11 @@ public class PlayerProfile:MonoBehaviour
         if (score > this.bestScore)
         {
             this.bestScore = score;
-            Dictionary<string, string> data = new Dictionary<string, string>() { { BestScoreKey, score.ToString() } };
-            UpdateUserDataRequest request = new UpdateUserDataRequest() { Data = data };
-            PlayFabClientAPI.UpdateUserData(request,
+            UpdatePlayerStatisticsRequest request = new UpdatePlayerStatisticsRequest()
+            {
+                Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = BestScoreStatisticName, Value = this.bestScore } }
+            };
+            PlayFabClientAPI.UpdatePlayerStatistics(request,
                 result =>
                 {
                     onSavedScore?.Invoke();
@@ -139,27 +144,65 @@ public class PlayerProfile:MonoBehaviour
     }
 
 
+    private void LoadUserStats()
+    {
+        isUserStatsLoading = true;
+        GetPlayerStatisticsRequest request = new GetPlayerStatisticsRequest();
+        PlayFabClientAPI.GetPlayerStatistics(request, GotUserStats, error => 
+        {
+            isUserStatsLoading = false;
+            Error(error.ErrorMessage);
+        });
+    }
+
     private void LoadUserData()
     {
         isUserDataLoading = true;
         GetUserDataRequest request = new GetUserDataRequest();
-        PlayFabClientAPI.GetUserData(request, GotUserData, error => Error(error.ErrorMessage));
+        PlayFabClientAPI.GetUserData(request, GotUserData, error =>
+        {
+            isUserDataLoading = false;
+            Error(error.ErrorMessage);
+        });
     }
 
     private void LoadUserProfile()
     {
         isUserProfileLoading = true;
         GetPlayerProfileRequest request = new GetPlayerProfileRequest();
-        PlayFabClientAPI.GetPlayerProfile(request, GotUserProfile, error => Error(error.ErrorMessage));
+        PlayFabClientAPI.GetPlayerProfile(request, GotUserProfile, 
+            error => 
+            {
+                isUserProfileLoading = false;
+                Error(error.ErrorMessage);
+            });
+    }
+
+    private void GotUserStats(GetPlayerStatisticsResult result)
+    {           
+        isUserStatsLoaded = true;
+        if(result != null)
+        {
+            StatisticValue bestScore = result.Statistics.Find(stat => stat.StatisticName == BestScoreStatisticName);
+            if (bestScore != null)
+                this.bestScore = bestScore.Value;
+
+
+            isUserStatsLoading = false;
+            onBestScoreGot?.Invoke(this.bestScore);
+        }
+
+        Debug.Log("Got stats");
     }
 
     private void GotUserProfile(GetPlayerProfileResult result)
-    {
+    {            
+        isUserProfileLoaded = true;
         if(result != null)
         {
             username = result.PlayerProfile.DisplayName;
 
-            isUserProfileLoaded = true;
+
             isUserProfileLoading = false;
             onUsernameGot?.Invoke(this.username);
         }
@@ -168,17 +211,14 @@ public class PlayerProfile:MonoBehaviour
     }
 
     private void GotUserData(GetUserDataResult result)
-    {
+    {            
+        isUserDataLoaded = true;
         if(result != null)
         {
-            if(result.Data.ContainsKey(BestScoreKey))
-                this.bestScore = Int32.Parse(result.Data[BestScoreKey].Value);
             if (result.Data.ContainsKey(CoinsKey))
-                this.coins = Int32.Parse(result.Data[CoinsKey].Value);        
-            
-            isUserDataLoaded = true;
+                this.coins = Int32.Parse(result.Data[CoinsKey].Value);                  
+
             isUserDataLoading = false;
-            onBestScoreGot?.Invoke(this.bestScore);
             onCoinsGot?.Invoke(this.coins);
         }
 
@@ -193,7 +233,7 @@ public class PlayerProfile:MonoBehaviour
 
     private void Error(string message)
     {
-        Debug.Log(message);
+        Debug.LogError(message);
     }
 }
 

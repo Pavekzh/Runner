@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SwipeInputDetector : InputDetector
 {
@@ -16,7 +17,10 @@ public class SwipeInputDetector : InputDetector
 
     public override bool CheckAnyInput()
     {
-        return Input.touchCount > 0;
+        if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject())
+            return true;
+        else
+            return false;
     }
 
     public override Vector2 CheckInputDirection()

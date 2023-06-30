@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class KeyboardInputDetector : InputDetector
 {
@@ -14,7 +15,10 @@ public class KeyboardInputDetector : InputDetector
 
     public override bool CheckAnyInput()
     {
-        return Input.anyKeyDown;
+        if (Input.anyKeyDown && !EventSystem.current.IsPointerOverGameObject())
+            return true;
+        else
+            return false;
     }
 
     public override Vector2 CheckInputDirection()
