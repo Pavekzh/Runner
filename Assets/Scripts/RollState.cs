@@ -6,6 +6,7 @@ public class RollState:RunState
 
     public override void Enter()
     {
+        character.Animations.Roll();
         character.Roll.Roll();
         character.Roll.OnRollEnd += EndRoll;
         Debug.Log("RollState enter");

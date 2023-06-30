@@ -9,6 +9,7 @@ public class Character:MonoBehaviour
     [SerializeField] private CharacterItems items;
     [SerializeField] private CharacterInvulnerability invulnerability;
     [SerializeField] private UISwitcher uiSwitcher;
+    [SerializeField] private CharacterAnimations animations;
 
     private InputDetector inputDetector;
     private ScoreCounter scoreCounter;
@@ -17,6 +18,7 @@ public class Character:MonoBehaviour
 
     public ScoreCounter ScoreCounter { get => scoreCounter; }
 
+    public CharacterAnimations Animations { get => animations; }
     public UISwitcher UISwitcher { get => uiSwitcher; }
     public CharacterDeath Death { get => death; }
     public CharacterMove Move { get => move; }

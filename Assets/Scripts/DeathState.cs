@@ -7,6 +7,7 @@ public class DeathState:BaseState
 
     public override void Enter()
     {
+        character.Animations.Die();
         Debug.Log("Death enter");
         character.Death.Die();
         character.UISwitcher.OpenGameOver(character.ScoreCounter.Score, character.Items.Coins, character.Death.CanBeRevived,Revive);
@@ -28,7 +29,8 @@ public class DeathState:BaseState
     
     
     private void Revive()
-    {        
+    {
+        character.Animations.Revive();
         stateMachine.ChangeState(character.InvulnerableState);        
         character.Move.InstantGetInLane();
         character.UISwitcher.OpenInRunUI();

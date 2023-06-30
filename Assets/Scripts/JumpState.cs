@@ -6,6 +6,7 @@ public class JumpState:RunState
 
     public override void Enter()
     {
+        character.Animations.Jump();
         character.Jump.Jump();
         Debug.Log("JumpState enter");
     }

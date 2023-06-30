@@ -8,13 +8,11 @@ public class CharacterRoll:MonoBehaviour
 
     public Action OnRollEnd;
 
-    private const float scaleMultiplier = 0.5f;
-
     private Coroutine RollCoroutine;
 
     public void Roll()
     {
-        RollCoroutine = StartCoroutine(RollAnimation());
+        RollCoroutine = StartCoroutine(RollTimer());
     }
 
     public void StopRoll()
@@ -22,22 +20,14 @@ public class CharacterRoll:MonoBehaviour
         if(RollCoroutine != null)
         {
             StopCoroutine(RollCoroutine);
-            RevertAnimationChanges();
         }
     }
 
-    private void RevertAnimationChanges()
-    {
-        transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y / scaleMultiplier, transform.localScale.z);
-    }
 
-    private IEnumerator RollAnimation()
+    private IEnumerator RollTimer()
     {
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * scaleMultiplier, transform.localScale.z);
         yield return new WaitForSeconds(rollTime);
 
-
-        RevertAnimationChanges();        
         RollCoroutine = null;
         OnRollEnd?.Invoke();
 
