@@ -10,6 +10,7 @@ class Bootstrap:MonoBehaviour
 
     [Header("Character")]    
     [SerializeField] Character character;
+    [SerializeField] CharacterItems characterItems;
     [SerializeField] UISwitcher uiSwitcher;
 
     [Header("UI")]    
@@ -42,7 +43,7 @@ class Bootstrap:MonoBehaviour
 
     private void BootstrapInRunUI()
     {
-        inRunUI.InitDependencies(scoreCounter);
+        inRunUI.InitDependencies(scoreCounter,characterItems);
     }    
     
     private void BootstrapGameOver()

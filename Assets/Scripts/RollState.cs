@@ -32,7 +32,9 @@ public class RollState:RunState
 
     public override void TriggerEnter(Collider trigger)
     {
-        if (trigger.gameObject.layer == character.Death.LowerObstacleLayer)
+        if (AddItem(trigger))
+            return;
+        else if (trigger.gameObject.layer == character.Death.LowerObstacleLayer)
         {
             stateMachine.ChangeState(character.DeathState);
         }

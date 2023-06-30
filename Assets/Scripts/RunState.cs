@@ -37,14 +37,31 @@ public class RunState : BaseState
 
     public override void TriggerEnter(Collider trigger)
     {
-        if(trigger.gameObject.layer == character.Death.LowerObstacleLayer)
+        if (AddItem(trigger))
+            return;
+        else if (trigger.gameObject.layer == character.Death.LowerObstacleLayer)
         {
             stateMachine.ChangeState(character.DeathState);
         }
-        else if(trigger.gameObject.layer == character.Death.UpperObstacleLayer)
+        else if (trigger.gameObject.layer == character.Death.UpperObstacleLayer)
         {
             stateMachine.ChangeState(character.DeathState);
         }
+        
+    }
+
+    protected bool AddItem(Collider collider)
+    {
+        if (collider.gameObject.layer == character.Items.ItemsLayer)
+        {
+            Item item = collider.gameObject.GetComponent<Item>();
+            item.Collected();
+            character.Items.AddItem(item.ItemData);
+
+            return true;
+        }
+        else
+            return false;
     }
 }
 

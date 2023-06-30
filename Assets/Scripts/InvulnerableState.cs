@@ -19,7 +19,10 @@ public class InvulnerableState:RunState
         Debug.Log("Invulnerable exit");
     }
 
-    public override void TriggerEnter(Collider trigger) { }
+    public override void TriggerEnter(Collider trigger) 
+    {
+        AddItem(trigger);
+    }
 
     public override void Collision(Collision collision) { }
 

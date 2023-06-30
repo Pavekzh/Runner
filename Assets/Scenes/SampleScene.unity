@@ -273,7 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208c967dd838b504cacd3aaaa9655f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coins: 13
+  coinsTypeId: coin
+  itemsLayer: 10
 --- !u!114 &182302091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChunksParent: {fileID: 1159660559}
-  presets: {fileID: 11400000, guid: c6466434d0fe08f458bf286a8be2e82e, type: 2}
+  presets: {fileID: 11400000, guid: 5f787e0cc4c52714ba7c5394dc66a140, type: 2}
 --- !u!114 &1398830131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkFactory: {fileID: 1398830130}
-  initialPoolSize: 5
+  initialPoolSize: 10
 --- !u!114 &1398830132
 MonoBehaviour:
   m_ObjectHideFlags: 0
