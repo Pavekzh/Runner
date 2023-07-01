@@ -130,18 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5479021757467005207, guid: f249077c58d7f2342a2839f208e29280, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8683801463974742021, guid: f249077c58d7f2342a2839f208e29280, type: 3}
       propertyPath: m_Name
       value: Sign up
       objectReference: {fileID: 0}
-    - target: {fileID: 8683801463974742024, guid: f249077c58d7f2342a2839f208e29280, type: 3}
-      propertyPath: messager
-      value: 
-      objectReference: {fileID: 943139071}
-    - target: {fileID: 8683801463974742024, guid: f249077c58d7f2342a2839f208e29280, type: 3}
-      propertyPath: logInController
-      value: 
-      objectReference: {fileID: 1698653605}
     - target: {fileID: 8683801463974742025, guid: f249077c58d7f2342a2839f208e29280, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -627,6 +623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Message
       objectReference: {fileID: 0}
+    - target: {fileID: 6017147365712314603, guid: dc5a829cd1dc21549bb8535710e2c167, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc5a829cd1dc21549bb8535710e2c167, type: 3}
 --- !u!114 &943139071 stripped
@@ -868,14 +868,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4979629347412318690, guid: 8c41298ccc86ca149ad22506c1e5c343, type: 3}
-      propertyPath: messager
-      value: 
-      objectReference: {fileID: 943139071}
-    - target: {fileID: 4979629347412318690, guid: 8c41298ccc86ca149ad22506c1e5c343, type: 3}
-      propertyPath: signUpController
-      value: 
-      objectReference: {fileID: 536106718}
     - target: {fileID: 4979629347412318691, guid: 8c41298ccc86ca149ad22506c1e5c343, type: 3}
       propertyPath: m_Name
       value: Login

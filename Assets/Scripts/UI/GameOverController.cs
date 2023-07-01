@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameOverController:MonoBehaviour
 {
     [SerializeField] private MessageController messenger;
-    [SerializeField] private GameObject panel;
+    [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private TMP_Text scoreField;
     [SerializeField] private TMP_Text coinsField;
     [SerializeField] private Button revive;
@@ -57,13 +57,13 @@ public class GameOverController:MonoBehaviour
         
     public void Close()
     {
-        panel.gameObject.SetActive(false);
+        visibleManager.Close();
     }
 
     private void Open()
     {
         DeactivateReviveButton();
-        panel.gameObject.SetActive(true);
+        visibleManager.Open();
 
         if(canBeRevived)
             Advertisements.Instance.LoadRewarded(ActivateReviveButton, ShowError);

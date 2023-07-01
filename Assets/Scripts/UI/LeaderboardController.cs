@@ -11,7 +11,7 @@ public class LeaderboardController:MonoBehaviour
     [SerializeField] private int recordsCount = 10;
     [SerializeField] private string statisticsName;
     [Header("UI")]
-    [SerializeField] private GameObject panel;
+    [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private Button close;
     [SerializeField] private VerticalLayoutGroup layoutGroup;
     [SerializeField] private GameObject recordsPoolParent;
@@ -49,12 +49,12 @@ public class LeaderboardController:MonoBehaviour
     }
     public void Open(int startPosition)
     {
-        panel.SetActive(true);
+        visibleManager.Open();
         LoadLeaderboard(startPosition);
     }
     public void Close()
     {
-        panel.SetActive(false);
+        visibleManager.Close();
         while (usedRecords.Count > 0)
             recordsPool.Release(usedRecords.Dequeue());
     }

@@ -6,6 +6,8 @@ using PlayFab.ClientModels;
 
 public class PlayerProfile:MonoBehaviour
 {
+    [SerializeField] private MessageController messanger;
+
     private const string CoinsKey = "Coins";
     private const string BestScoreStatisticName = "BestScore";
 
@@ -233,7 +235,7 @@ public class PlayerProfile:MonoBehaviour
 
     private void Error(string message)
     {
-        Debug.LogError(message);
+        messanger.ShowMessage("Error", message);
     }
 }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -12,6 +11,7 @@ public class SignUpController:MonoBehaviour
     [SerializeField] private TMP_InputField repeatPassword;
 
     [Header("Actions")]
+    [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private Toggle remindMe;
     [SerializeField] private Button signUp;
     [SerializeField] private Button logIn;
@@ -31,12 +31,12 @@ public class SignUpController:MonoBehaviour
 
     public void Open()
     {
-        gameObject.SetActive(true);
+        visibleManager.Open();
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        visibleManager.Close();
     }
 
     private void Start()

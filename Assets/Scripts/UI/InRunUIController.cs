@@ -5,7 +5,7 @@ using TMPro;
 
 public class InRunUIController:MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
+    [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private TMP_Text scoreValue;
     [SerializeField] private TMP_Text coinsValue;
     [SerializeField] private Button menu;
@@ -37,12 +37,12 @@ public class InRunUIController:MonoBehaviour
 
     public void Open()
     {
-        panel.SetActive(true);
+        visibleManager.Open();
     }
 
     public void Close()
     {
-        panel.SetActive(false);
+        visibleManager.Close();
     }
 
 

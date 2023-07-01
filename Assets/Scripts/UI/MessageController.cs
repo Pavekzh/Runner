@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MessageController : MonoBehaviour
 {
+    [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text message;
     [SerializeField] private Button okButton;
@@ -18,11 +19,11 @@ public class MessageController : MonoBehaviour
         this.title.text = Title;
         this.message.text = Message;
 
-        gameObject.SetActive(true);
+        visibleManager.Open();
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        visibleManager.Close();
     }
 }

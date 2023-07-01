@@ -39,7 +39,7 @@ class GameBootstrap:MonoBehaviour
 
     private void BootstrapMainMenu()
     {
-        mainMenu.InitDependencies(playerProfile);
+        mainMenu.InitDependencies(playerProfile,sceneLoader);
     }
 
     private void BootstrapInRunUI()

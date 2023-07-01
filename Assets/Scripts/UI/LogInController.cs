@@ -9,9 +9,9 @@ public class LogInController:MonoBehaviour
     [SerializeField] private TMP_InputField email;
     [SerializeField] private TMP_InputField password;
 
-    [Header("Actions")] 
-    [SerializeField] private GameObject panel;
-    [SerializeField] private GameObject title;
+    [Header("Actions")]
+    [SerializeField] private VisibleManager titleVisibleManager;
+    [SerializeField] private VisibleManager panelVisibleManager;
     [SerializeField] private Toggle remindMe;
     [SerializeField] private Button signUp;
     [SerializeField] private Button logIn;
@@ -31,20 +31,20 @@ public class LogInController:MonoBehaviour
 
     public void Open()
     {
-        panel.SetActive(true);
-        gameObject.SetActive(true);
-        title.SetActive(true);
+        panelVisibleManager.Open();
+        titleVisibleManager.Open();
     }
 
     public void Close()
     {
-        gameObject.SetActive(false);
-        title.SetActive(false);
+        panelVisibleManager.Close();
+        titleVisibleManager.Close();
     }
 
     private void Start()
     {
-        panel.SetActive(false);
+        panelVisibleManager.Close();
+        titleVisibleManager.Open();
         if (PlayerPrefs.GetString(Authentication.AuthDataKey) == "")
             SignUp();
         else
@@ -52,7 +52,7 @@ public class LogInController:MonoBehaviour
             if (PlayerPrefs.GetInt(Authentication.RemindMeKey) == 1)
                 authentication.SilentLogin(StartGame, LoginError);
             else
-                panel.SetActive(true);
+                panelVisibleManager.Open();
         }
 
 
@@ -91,7 +91,7 @@ public class LogInController:MonoBehaviour
     private void LoginError(string message)
     {
         messenger.ShowMessage("Error", message);
-        panel.SetActive(true);
+        panelVisibleManager.Open();
     }
 
     private void StartGame()

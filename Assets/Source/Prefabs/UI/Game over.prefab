@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4339358824181878565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -173,10 +173,10 @@ RectTransform:
   m_Father: {fileID: 4339358824917196424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 200}
+  m_SizeDelta: {x: -88, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4339358824181878567
 CanvasRenderer:
@@ -243,7 +243,7 @@ RectTransform:
   m_GameObject: {fileID: 4339358824519093487}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4339358823900351192}
@@ -500,6 +500,7 @@ GameObject:
   - component: {fileID: 4339358824917196422}
   - component: {fileID: 4339358824917196423}
   - component: {fileID: 4339358824917196427}
+  - component: {fileID: 5579075105379663851}
   m_Layer: 5
   m_Name: Game over
   m_TagString: Untagged
@@ -602,11 +603,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messenger: {fileID: 0}
-  panel: {fileID: 4339358824181878562}
+  visibleManager: {fileID: 5579075105379663851}
   scoreField: {fileID: 4339358825245923369}
   coinsField: {fileID: 4339358823900351195}
   revive: {fileID: 4339358824920853130}
   menu: {fileID: 4339358825868072253}
+--- !u!114 &5579075105379663851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339358824917196420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b621f2e2b04304da591404d4db2bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpened: 0
+  target: {fileID: 4339358824181878562}
+  deltaScale: 0.7
+  openConfig: {fileID: 11400000, guid: 8117a5c5b3f823b4790a8f69e07ae88c, type: 2}
+  closeConfig: {fileID: 11400000, guid: 5879e232af0b8e649a97d064ed19973d, type: 2}
 --- !u!1 &4339358824920853128
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +653,7 @@ RectTransform:
   m_GameObject: {fileID: 4339358824920853128}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4339358825830575625}
@@ -891,7 +909,7 @@ RectTransform:
   m_GameObject: {fileID: 4339358825749286573}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4339358825245923366}
@@ -1027,15 +1045,15 @@ RectTransform:
   m_GameObject: {fileID: 4339358825817166206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4339358824181878565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 62}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -38}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4339358825817166179
@@ -1300,7 +1318,7 @@ RectTransform:
   m_GameObject: {fileID: 4339358825868072251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4339358824673627586}
