@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Character
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lower obstacle
+  - Upper obstacle
+  - Ground
+  - GroundSemblance
+  - Item
   - 
   - 
   - 
