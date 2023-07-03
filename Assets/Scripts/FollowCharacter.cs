@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class FollowCharacter:MonoBehaviour
 {
@@ -6,11 +7,19 @@ public class FollowCharacter:MonoBehaviour
 
     private void Start()
     {
-        character.Move.OnMoved += CharacterMoved;
+        character.Move.OnRun += Run;
+        character.Move.OnChangingLane += ChangingLane;
     }
 
-    private void CharacterMoved(Vector3 delta)
+    private void ChangingLane(Vector3 delta)
+    {
+        transform.Translate(delta);
+    }
+
+    private void Run(Vector3 delta)
     {
         transform.Translate(delta,Space.World);
     }
+
+
 }

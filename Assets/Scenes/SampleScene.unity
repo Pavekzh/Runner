@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChunksParent: {fileID: 1159660559}
-  presets: {fileID: 11400000, guid: 5f787e0cc4c52714ba7c5394dc66a140, type: 2}
+  presets: {fileID: 11400000, guid: 73d5d9bb965bc8944aead722746ccafb, type: 2}
 --- !u!114 &1398830131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,6 +1955,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4613904560694177039, guid: 8d72402b5dede5649baf7e29d5f5dacd, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 1369893556}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d72402b5dede5649baf7e29d5f5dacd, type: 3}
 --- !u!95 &5866666020852203765 stripped

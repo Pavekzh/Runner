@@ -1509,7 +1509,6 @@ GameObject:
   - component: {fileID: 8683801463974742027}
   - component: {fileID: 8683801463974742020}
   - component: {fileID: 8683801463974742024}
-  - component: {fileID: 8511077380247929663}
   - component: {fileID: 3150649696326433444}
   m_Layer: 5
   m_Name: Sign up
@@ -1621,20 +1620,6 @@ MonoBehaviour:
   remindMe: {fileID: 8683801464791306467}
   signUp: {fileID: 8683801464364079255}
   logIn: {fileID: 8683801465047046308}
---- !u!114 &8511077380247929663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8683801463974742021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2953588a49c099b42932bff31ace346a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpened: 0
-  target: {fileID: 5479021757467005207}
 --- !u!114 &3150649696326433444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,7 +1633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpened: 0
-  target: {fileID: 5479021757467005207}
+  target: {fileID: 5211721611088310580}
   endPosition: {fileID: 4844710150005726844}
   openConfig: {fileID: 11400000, guid: bb55f484e08a0844793034559703e6f7, type: 2}
   closeConfig: {fileID: 11400000, guid: bb55f484e08a0844793034559703e6f7, type: 2}

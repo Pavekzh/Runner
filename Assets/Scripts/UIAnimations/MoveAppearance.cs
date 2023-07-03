@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class MoveAppearance : VisibleManager
 {
-    [SerializeField] private GameObject target;
-    [SerializeField] private Transform endPosition;
+    [SerializeField] private RectTransform target;
+    [SerializeField] private RectTransform endPosition;
     [SerializeField] private AnimationConfig openConfig;
     [SerializeField] private AnimationConfig closeConfig;
 
-    private Vector3 startPosition;
+    private Vector2 startPosition;
 
     private void Awake()
     {
-        startPosition = target.transform.position;
+        startPosition = target.anchoredPosition;
     }
 
     protected override void DoClose()
     {
-        target.transform.DOMove(startPosition, closeConfig.Duration).SetEase(closeConfig.EaseFuncition);
+        target.DOAnchorPos(startPosition, closeConfig.Duration).SetEase(closeConfig.EaseFuncition);
     }
 
     protected override void DoOpen()
     {
-        target.transform.DOMove(endPosition.position, openConfig.Duration).SetEase(openConfig.EaseFuncition);
+        target.DOAnchorPos(endPosition.anchoredPosition, openConfig.Duration).SetEase(openConfig.EaseFuncition);
     }
 }
 

@@ -20,7 +20,9 @@ public class CharacterMove:MonoBehaviour
     public float Speed { get => speed; }
     public float Acceleration { get => acceleration; }
 
-    public event Action<Vector3> OnMoved;
+    public event Action<Vector3> OnRun;       
+    public event Action<Vector3> OnChangingLane;
+
 
     private Coroutine currentChangeLaneCoroutine;
 
@@ -65,14 +67,14 @@ public class CharacterMove:MonoBehaviour
 
         Lane++;
 
-        if(currentChangeLaneCoroutine != null)
+        if (currentChangeLaneCoroutine != null)
             StopCoroutine(currentChangeLaneCoroutine);
 
         currentChangeLaneCoroutine = StartCoroutine(ChangingLane());
     }
 
     private IEnumerator ChangingLane()
-    { 
+    {
         yield return null;
         float startingDelta = Mathf.Abs(XPositions[Lane] - transform.position.x);
         float startingPos = transform.position.x;
@@ -80,7 +82,11 @@ public class CharacterMove:MonoBehaviour
         while(Mathf.Abs(transform.position.x - startingPos) < startingDelta)
         {
             Vector3 toLane = new Vector3(XPositions[Lane] - transform.position.x,0,0).normalized;
-            transform.Translate(toLane * changingLaneSpeed * Time.deltaTime);
+            Vector3 delta = toLane * changingLaneSpeed * Time.deltaTime;
+
+            OnChangingLane(delta);
+            transform.Translate(delta);
+
             yield return null;
         }
         transform.position = new Vector3(XPositions[Lane],transform.position.y,transform.position.z);
@@ -94,7 +100,7 @@ public class CharacterMove:MonoBehaviour
         Vector3 delta = direction * speed * Time.deltaTime;
 
         transform.Translate(delta, Space.World);
-        OnMoved?.Invoke(delta);
+        OnRun?.Invoke(delta);
     }
 }
 

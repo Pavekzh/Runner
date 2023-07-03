@@ -44,11 +44,12 @@ public class LogInController:MonoBehaviour
     private void Start()
     {
         panelVisibleManager.Close();
-        titleVisibleManager.Open();
+
         if (PlayerPrefs.GetString(Authentication.AuthDataKey) == "")
             SignUp();
         else
-        {
+        {        
+            titleVisibleManager.Open();
             if (PlayerPrefs.GetInt(Authentication.RemindMeKey) == 1)
                 authentication.SilentLogin(StartGame, LoginError);
             else

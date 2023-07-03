@@ -17,10 +17,14 @@ public class SwipeInputDetector : InputDetector
 
     public override bool CheckAnyInput()
     {
-        if (Input.touchCount > 0 && !EventSystem.current.IsPointerOverGameObject())
-            return true;
-        else
-            return false;
+        if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) && touch.phase != TouchPhase.Ended)
+                return true; ;
+        }
+        return false;
     }
 
     public override Vector2 CheckInputDirection()

@@ -41,8 +41,14 @@ public class MainMenuController:MonoBehaviour
         visibleManager.Close();
     }
 
+    public void Open()
+    {
+        visibleManager.Open();
+    }
+
     private void OpenLeaderboard()
     {
+        Close();
         leaderboardController.Open();
     }
 
