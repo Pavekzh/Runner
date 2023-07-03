@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Coin pouch
   m_EditorClassIdentifier: 
   typeId: coin
-  count: 10
+  count: 5

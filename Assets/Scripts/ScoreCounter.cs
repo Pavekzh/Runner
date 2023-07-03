@@ -11,7 +11,11 @@ public class ScoreCounter:MonoBehaviour
     {
         get
         {
-            return player.position.z - startPoint.position.z;
+            float distance = player.position.z - startPoint.position.z;
+            if (distance < 0)
+                return 0;
+
+            return distance;
         }
     }
 
@@ -19,9 +23,6 @@ public class ScoreCounter:MonoBehaviour
     {
         get
         {
-            if (RawDistance < 0)
-                return 0;
-
             return (int)(RawDistance * scoreMultiplier);
         }
     }
