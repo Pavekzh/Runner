@@ -18,12 +18,12 @@ public class MoveAppearance : VisibleManager
 
     protected override void DoClose()
     {
-        target.DOAnchorPos(startPosition, closeConfig.Duration).SetEase(closeConfig.EaseFuncition);
+        target.DOAnchorPos(startPosition, closeConfig.Duration).SetEase(closeConfig.EaseFuncition).SetUpdate(true);
     }
 
     protected override void DoOpen()
     {
-        target.DOAnchorPos(endPosition.anchoredPosition, openConfig.Duration).SetEase(openConfig.EaseFuncition);
+        target.DOAnchorPos(endPosition.anchoredPosition, openConfig.Duration).SetEase(openConfig.EaseFuncition).SetUpdate(true);
     }
 }
 

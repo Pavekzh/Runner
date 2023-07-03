@@ -11,13 +11,13 @@ public class ExpandAppearance : VisibleManager
 
     protected override void DoClose()
     {
-        target.transform.DOScale(deltaScale, closeConfig.Duration).SetEase(closeConfig.EaseFuncition).OnComplete(() => target.SetActive(false));
+        target.transform.DOScale(deltaScale, closeConfig.Duration).SetEase(closeConfig.EaseFuncition).OnComplete(() => target.SetActive(false)).SetUpdate(true);
     }
 
     protected override void DoOpen()
     {
         target.SetActive(true);
         target.transform.localScale *= deltaScale;
-        target.transform.DOScale(1, openConfig.Duration).SetEase(openConfig.EaseFuncition);
+        target.transform.DOScale(1, openConfig.Duration).SetEase(openConfig.EaseFuncition).SetUpdate(true);
     }
 }

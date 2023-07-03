@@ -13,6 +13,7 @@ class GameBootstrap:MonoBehaviour
     [SerializeField] Character character;
     [SerializeField] CharacterItems characterItems;
     [SerializeField] UISwitcher uiSwitcher;
+    [SerializeField] PauseController pause;
 
     [Header("UI")]    
     [SerializeField] InRunUIController inRunUI;
@@ -26,7 +27,8 @@ class GameBootstrap:MonoBehaviour
 
         BootstrapMainMenu();
         BootstrapInRunUI();
-        BootstrapGameOver();        
+        BootstrapGameOver();
+        BootstrapPause();
         
         BootstrapCharacter();
         BootstrapUISwitcher();
@@ -46,6 +48,11 @@ class GameBootstrap:MonoBehaviour
     {
         inRunUI.InitDependencies(scoreCounter,characterItems);
     }    
+
+    private void BootstrapPause()
+    {
+        pause.InitDependencies(sceneLoader);
+    }
     
     private void BootstrapGameOver()
     {

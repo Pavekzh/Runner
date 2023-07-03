@@ -5,10 +5,11 @@ using TMPro;
 
 public class InRunUIController:MonoBehaviour
 {
+    [SerializeField] private PauseController pause;
     [SerializeField] private VisibleManager visibleManager;
     [SerializeField] private TMP_Text scoreValue;
     [SerializeField] private TMP_Text coinsValue;
-    [SerializeField] private Button menu;
+    [SerializeField] private Button pauseButton;
 
     private ScoreCounter scoreCounter;
     private CharacterItems coinsCounter;
@@ -21,7 +22,7 @@ public class InRunUIController:MonoBehaviour
 
     private void Start()
     {
-        menu.onClick.AddListener(OpenMenu);
+        pauseButton.onClick.AddListener(Pause);
     }
 
     private void Update()
@@ -30,9 +31,9 @@ public class InRunUIController:MonoBehaviour
         coinsValue.text = coinsCounter.Coins.ToString();
     }
 
-    private void OpenMenu()
+    private void Pause()
     {
-        throw new NotImplementedException();
+        pause.Pause();
     }
 
     public void Open()

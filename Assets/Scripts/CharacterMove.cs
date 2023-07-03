@@ -36,7 +36,10 @@ public class CharacterMove:MonoBehaviour
 
     public void InstantGetInLane()
     {
+        float deltaX = XPositions[Lane] - transform.position.x;
+
         transform.position = new Vector3(XPositions[Lane], transform.position.y, transform.position.z);
+        OnChangingLane(new Vector3(deltaX, 0, 0));
     }
 
     public void StopLaneChanging()
