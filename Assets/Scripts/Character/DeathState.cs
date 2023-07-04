@@ -35,4 +35,6 @@ public class DeathState:BaseState
         character.Move.InstantGetInLane();
         character.UISwitcher.OpenInRunUI();
     }
+
+    public override void CollisionExit(Collision collision) { }
 }

@@ -17,6 +17,7 @@ public abstract class BaseState
     public abstract void Run();
 
     public abstract void Collision(Collision collision);
+    public abstract void CollisionExit(Collision collision);
     public abstract void TriggerEnter(Collider trigger);
 
     public abstract void HandleInput(InputDetector inputDetector);

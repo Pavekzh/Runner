@@ -201,7 +201,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &43164693
 RectTransform:
@@ -822,6 +822,10 @@ PrefabInstance:
       value: Message
       objectReference: {fileID: 0}
     - target: {fileID: 6017147365712314603, guid: dc5a829cd1dc21549bb8535710e2c167, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017147366589743256, guid: dc5a829cd1dc21549bb8535710e2c167, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

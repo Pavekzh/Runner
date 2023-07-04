@@ -27,5 +27,7 @@ public class StandState : BaseState
     public override void TriggerEnter(Collider trigger) { }    
     
     public override void Collision(Collision collision) { }
+
+    public override void CollisionExit(Collision collision) { }
 }
 

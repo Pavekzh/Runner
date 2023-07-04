@@ -68,5 +68,10 @@ public class Character:MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         stateMachine.CurrentState.Collision(collision);
-    }   
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        stateMachine.CurrentState.CollisionExit(collision);
+    }
 }
