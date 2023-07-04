@@ -63,5 +63,7 @@ public class RunState : BaseState
         else
             return false;
     }
+
+    public override void CollisionExit(Collision collision) { }
 }
 

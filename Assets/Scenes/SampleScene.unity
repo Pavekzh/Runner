@@ -283,8 +283,8 @@ MonoBehaviour:
   leftLaneOffset: -2
   rightLaneOffset: 2
   changingLaneSpeed: 10
-  speed: 5
-  acceleration: 0.1
+  speed: 6
+  acceleration: 0.06
 --- !u!114 &182302088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 768
-  Power: 10
+  Power: 11
 --- !u!114 &182302090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68bbb917c3c734478a6e4fa17659d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollTime: 1
+  rollTime: 0.7
 --- !u!1 &257005877
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdba17495faa0e40bd27415b23023f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDetector: {fileID: 1484653511}
+  inputDetector: {fileID: 1571176523}
   scoreCounter: {fileID: 309924961}
   worldGenerator: {fileID: 1398830132}
   playerProfile: {fileID: 338021636}

@@ -4,6 +4,8 @@ public class JumpState:RunState
 {
     public JumpState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
 
+    private bool jumpStarted = false;
+
     public override void Enter()
     {
         character.Animations.Jump();
@@ -28,13 +30,30 @@ public class JumpState:RunState
 
     public override void Collision(Collision collision)
     {
+        if (jumpStarted)
+        {
+            LayerMask layerMask = character.Jump.GroundLayers;
+            int layer = collision.collider.gameObject.layer;
+
+            bool isColliderGround = layerMask == (layerMask | (1 << layer));
+
+            if (isColliderGround)
+            {
+                stateMachine.ChangeState(character.RunState);
+                jumpStarted = false;
+            }
+        }
+    }
+
+    public override void CollisionExit(Collision collision)
+    {
         LayerMask layerMask = character.Jump.GroundLayers;
         int layer = collision.collider.gameObject.layer;
 
         bool isColliderGround = layerMask == (layerMask | (1 << layer));
 
         if (isColliderGround)
-            stateMachine.ChangeState(character.RunState);
+            jumpStarted = true;
     }
 
 }
