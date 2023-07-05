@@ -8,9 +8,8 @@ public class JumpState:RunState
 
     public override void Enter()
     {
-        character.Animations.Jump();
-        character.Jump.Jump();
-        Debug.Log("JumpState enter");
+        Debug.Log("JumpState enter");        
+        Jump();
     }
 
     public override void Exit()
@@ -23,16 +22,16 @@ public class JumpState:RunState
         Vector2 input = inputDetector.CheckInputDirection();
 
         if (input.x == 1)
-            character.Move.ChangeLaneRight();
+            ChangeLaneRight();
         if (input.x == -1)
-            character.Move.ChangeLaneLeft();
+            ChangeLaneLeft();
     }
 
     public override void Collision(Collision collision)
     {
         if (jumpStarted)
         {
-            LayerMask layerMask = character.Jump.GroundLayers;
+            LayerMask layerMask = character.GroundLayers;
             int layer = collision.collider.gameObject.layer;
 
             bool isColliderGround = layerMask == (layerMask | (1 << layer));
@@ -47,13 +46,19 @@ public class JumpState:RunState
 
     public override void CollisionExit(Collision collision)
     {
-        LayerMask layerMask = character.Jump.GroundLayers;
+        LayerMask layerMask = character.GroundLayers;
         int layer = collision.collider.gameObject.layer;
 
         bool isColliderGround = layerMask == (layerMask | (1 << layer));
 
         if (isColliderGround)
             jumpStarted = true;
+    }
+
+    protected void Jump()
+    {
+        character.Animator.SetTrigger(character.JumpTrigger);
+        character.Rigidbody.AddForce(Vector3.up * character.JumpPower, ForceMode.VelocityChange);
     }
 
 }

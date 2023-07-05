@@ -12,12 +12,12 @@ public class InRunUIController:MonoBehaviour
     [SerializeField] private Button pauseButton;
 
     private ScoreCounter scoreCounter;
-    private CharacterItems coinsCounter;
+    private Character character;
     
-    public void InitDependencies(ScoreCounter scoreCounter,CharacterItems coinsCounter)
+    public void InitDependencies(ScoreCounter scoreCounter,Character character)
     {
         this.scoreCounter = scoreCounter;
-        this.coinsCounter = coinsCounter;
+        this.character = character;
     }
 
     private void Start()
@@ -28,7 +28,7 @@ public class InRunUIController:MonoBehaviour
     private void Update()
     {
         scoreValue.text = scoreCounter.Score.ToString();
-        coinsValue.text = coinsCounter.Coins.ToString();
+        coinsValue.text = character.Coins.ToString();
     }
 
     private void Pause()

@@ -1,21 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System;
+using UnityEngine;
 
 public class RollState:RunState
 {
     public RollState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
 
+    private Coroutine rollCoroutine;
+
     public override void Enter()
     {
-        character.Animations.Roll();
-        character.Roll.Roll();
-        character.Roll.OnRollEnd += EndRoll;
-        Debug.Log("RollState enter");
+        Debug.Log("RollState enter");        
+        Roll();
     }
 
     public override void Exit()
     {
-        character.Roll.StopRoll();
-        character.Roll.OnRollEnd -= EndRoll;
+        StopRoll();
         Debug.Log("RollState exit");
     }
 
@@ -24,9 +25,9 @@ public class RollState:RunState
         Vector2 input = inputDetector.CheckInputDirection();
 
         if (input.x == 1)
-            character.Move.ChangeLaneRight();
+            ChangeLaneRight();
         if (input.x == -1)
-            character.Move.ChangeLaneLeft();
+            ChangeLaneLeft();
         if (input.y == 1)
             stateMachine.ChangeState(character.JumpState);
     }
@@ -35,17 +36,36 @@ public class RollState:RunState
     {
         if (AddItem(trigger))
             return;
-        else if (trigger.gameObject.layer == character.Death.LowerObstacleLayer)
-        {
-            stateMachine.ChangeState(character.DeathState);
-        }
+        else if (trigger.gameObject.layer == character.LowerObstacleLayer)
+            Death();
+    }    
+
+    protected void Roll()
+    {
+        character.Animator.SetTrigger(character.RollTrigger);
+        rollCoroutine = character.StartCoroutine(RollTimer());
     }    
     
+    protected void StopRoll()
+    {
+        if(rollCoroutine != null)
+        {
+            character.StopCoroutine(rollCoroutine);
+            rollCoroutine = null;
+        }
+    }    
     
     private void EndRoll()
     {
         stateMachine.ChangeState(character.RunState);
     }
 
+    private IEnumerator RollTimer()
+    {
+        yield return new WaitForSeconds(character.RollTime);
+
+        rollCoroutine = null;
+        EndRoll();
+    }
 }
 

@@ -12,7 +12,7 @@ public class GameOverController:MonoBehaviour
     [SerializeField] private Button revive;
     [SerializeField] private Button menu;
 
-    private Action onRevive;
+    public event Action OnRevive;
 
     private PlayerProfile playerProfile;
     private SceneLoader sceneLoader;
@@ -34,13 +34,6 @@ public class GameOverController:MonoBehaviour
     {
         revive.onClick.AddListener(ReviveClick);
         menu.onClick.AddListener(MenuClick);
-    }
-
-
-    public void Open(int score, int coins, bool canBeRevived,Action onRevive)
-    {
-        this.onRevive = onRevive;
-        Open(score, coins, canBeRevived);
     }
 
     public void Open(int score, int coins,bool canBeRevived)
@@ -88,7 +81,7 @@ public class GameOverController:MonoBehaviour
 
     private void Revive()
     {
-        onRevive?.Invoke();
+        OnRevive?.Invoke();
     }
 
     private void Menu()

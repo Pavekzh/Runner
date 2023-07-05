@@ -56,6 +56,7 @@ public class PauseController:MonoBehaviour
     private void Menu()
     {
         sceneLoader.LoadGame();
+        Time.timeScale = 1;
     }
 }
 
