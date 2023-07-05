@@ -1,21 +1,23 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 
 public class InvulnerableState:RunState
 {
     public InvulnerableState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
 
+    private Coroutine timerCoroutine;
+
     public override void Enter()
     {
-        character.Invulnerability.OnInvulnerabilityEnd += InvulnerabilityEnd;
-        character.Invulnerability.EnableInvulnerability();
         Debug.Log("Invulnerable enter");
+        character.Animator.SetTrigger(character.ReviveTrigger);
+        InstantGetInLane();
+        EnableInvulnerability();
     }
 
     public override void Exit()
     {
-        character.Invulnerability.OnInvulnerabilityEnd -= InvulnerabilityEnd;
-        character.Invulnerability.DisableInvulnerability();
+        DisableInvulnerability();
         Debug.Log("Invulnerable exit");
     }
 
@@ -33,23 +35,45 @@ public class InvulnerableState:RunState
         if (input.x == 1)
         {
             stateMachine.ChangeState(character.RunState);
-            character.Move.ChangeLaneRight();
+            ChangeLaneRight();
         }
         if (input.x == -1)
         {
             stateMachine.ChangeState(character.RunState);
-            character.Move.ChangeLaneLeft();
+            ChangeLaneLeft();
         }
         if (input.y == 1)
+        {
             stateMachine.ChangeState(character.JumpState);
+        }
         if (input.y == -1)
+        {            
             stateMachine.ChangeState(character.RollState);
+        }
+
     }
 
-    private void InvulnerabilityEnd()
+    protected void EnableInvulnerability()
     {
+        Physics.IgnoreLayerCollision(character.gameObject.layer, character.InvulnerableToLayer, true);
+        timerCoroutine = character.StartCoroutine(Timer());
+    }
+
+    protected void DisableInvulnerability()
+    {
+        if (timerCoroutine != null)
+        {
+            character.StopCoroutine(timerCoroutine);
+            Physics.IgnoreLayerCollision(character.gameObject.layer, character.InvulnerableToLayer, false);
+            timerCoroutine = null;
+        }
+    }
+
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(character.InvulnerabilityTime);
         stateMachine.ChangeState(character.RunState);
     }
-    
+
 }
 

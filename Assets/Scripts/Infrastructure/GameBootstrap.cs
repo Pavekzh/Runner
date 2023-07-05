@@ -11,8 +11,6 @@ class GameBootstrap:MonoBehaviour
 
     [Header("Character")]    
     [SerializeField] Character character;
-    [SerializeField] CharacterItems characterItems;
-    [SerializeField] UISwitcher uiSwitcher;
     [SerializeField] PauseController pause;
 
     [Header("UI")]    
@@ -31,7 +29,6 @@ class GameBootstrap:MonoBehaviour
         BootstrapPause();
         
         BootstrapCharacter();
-        BootstrapUISwitcher();
     }
 
     private void BootstrapWorldGenerator()
@@ -46,7 +43,7 @@ class GameBootstrap:MonoBehaviour
 
     private void BootstrapInRunUI()
     {
-        inRunUI.InitDependencies(scoreCounter,characterItems);
+        inRunUI.InitDependencies(scoreCounter,character);
     }    
 
     private void BootstrapPause()
@@ -61,11 +58,7 @@ class GameBootstrap:MonoBehaviour
 
     private void BootstrapCharacter()
     {
-        character.InitDependecies(inputDetector, scoreCounter);
+        character.InitDependecies(inputDetector, scoreCounter, inRunUI, mainMenu, gameOver);
     }
 
-    private void BootstrapUISwitcher()
-    {
-        uiSwitcher.InitDependencies(mainMenu, inRunUI, gameOver);
-    }
 }

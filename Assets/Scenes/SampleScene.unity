@@ -187,14 +187,6 @@ GameObject:
   - component: {fileID: 182302078}
   - component: {fileID: 182302084}
   - component: {fileID: 182302086}
-  - component: {fileID: 182302092}
-  - component: {fileID: 182302087}
-  - component: {fileID: 182302088}
-  - component: {fileID: 182302089}
-  - component: {fileID: 182302090}
-  - component: {fileID: 182302091}
-  - component: {fileID: 182302094}
-  - component: {fileID: 182302093}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -260,133 +252,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0943159935f528f4b82ff5da05864851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {fileID: 182302087}
-  death: {fileID: 182302088}
-  jump: {fileID: 182302089}
-  roll: {fileID: 182302094}
-  items: {fileID: 182302090}
-  invulnerability: {fileID: 182302091}
-  uiSwitcher: {fileID: 182302092}
-  animations: {fileID: 182302093}
---- !u!114 &182302087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d0377f4f56312542855f2bd62bbb426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   leftLaneOffset: -2
   rightLaneOffset: 2
   changingLaneSpeed: 10
-  speed: 6
-  acceleration: 0.06
---- !u!114 &182302088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b99e22b5f22dd6459d8f99d789155af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 6.5
+  acceleration: 0.07
   lowerObstacleLayer: 6
   upperObstacleLayer: 7
   timesCanBeRevived: 1
---- !u!114 &182302089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 684a6cfa2b7314342ac83353e368f358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   groundLayers:
     serializedVersion: 2
     m_Bits: 768
-  Power: 11
---- !u!114 &182302090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208c967dd838b504cacd3aaaa9655f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  power: 12
+  rollTime: 0.7
   coinsTypeId: coin
   itemsLayer: 10
---- !u!114 &182302091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e536e54cb7dc342a8f136c2dd31c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   invulnerabilityTime: 3
   invulnerableTo: 9
---- !u!114 &182302092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce475c74a37845140a283d8782c44709, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &182302093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06e6beb3e150ce94c8ec5ad4fa757704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   animator: {fileID: 5866666020852203765}
   runTrigger: Run
   jumpTrigger: Jump
   rollTrigger: Roll
   dieTrigger: Die
   reviveTrigger: Revive
---- !u!114 &182302094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182302077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e68bbb917c3c734478a6e4fa17659d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rollTime: 0.7
 --- !u!1 &257005877
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,14 +304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdba17495faa0e40bd27415b23023f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDetector: {fileID: 1571176523}
+  inputDetector: {fileID: 1484653511}
   scoreCounter: {fileID: 309924961}
   worldGenerator: {fileID: 1398830132}
   playerProfile: {fileID: 338021636}
   sceneLoader: {fileID: 181421302}
   character: {fileID: 182302086}
-  characterItems: {fileID: 182302090}
-  uiSwitcher: {fileID: 182302092}
   pause: {fileID: 1173252146}
   inRunUI: {fileID: 1124076304}
   gameOver: {fileID: 744605722}
@@ -875,7 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dac54bd7fe852f46b81d85a826bba27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 182302086}
+  target: {fileID: 182302081}
+  ignoreY: 1
 --- !u!114 &1063323176 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6017147365712314602, guid: dc5a829cd1dc21549bb8535710e2c167, type: 3}
