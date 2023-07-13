@@ -14,6 +14,7 @@ public class RunState : BaseState
     public override void Enter()
     {
         Debug.Log("Run enter");
+        character.Animator.SetTrigger(character.RunTrigger);
     }
 
     public override void Exit()

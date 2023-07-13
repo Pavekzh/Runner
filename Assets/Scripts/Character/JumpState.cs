@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class JumpState:RunState
 {
     public JumpState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     private bool jumpStarted = false;
+    private bool downInput = false;
 
     public override void Enter()
     {
@@ -25,6 +27,17 @@ public class JumpState:RunState
             ChangeLaneRight();
         if (input.x == -1)
             ChangeLaneLeft();
+        if (input.y == -1)
+            SpeededFall();
+      
+    }
+
+    private void SpeededFall()
+    {
+        Debug.Log("Fall");
+        downInput = true;
+        character.Rigidbody.velocity = Vector3.zero;
+        character.Rigidbody.AddForce(Vector3.down * character.SpeededFallPower, ForceMode.VelocityChange);
     }
 
     public override void Collision(Collision collision)
@@ -38,7 +51,11 @@ public class JumpState:RunState
 
             if (isColliderGround)
             {
-                stateMachine.ChangeState(character.RunState);
+                if (downInput)
+                    stateMachine.ChangeState(character.RollState);
+                else
+                    stateMachine.ChangeState(character.RunState);
+
                 jumpStarted = false;
             }
         }
@@ -57,6 +74,7 @@ public class JumpState:RunState
 
     protected void Jump()
     {
+        downInput = false;
         character.Animator.SetTrigger(character.JumpTrigger);
         character.Rigidbody.AddForce(Vector3.up * character.JumpPower, ForceMode.VelocityChange);
     }

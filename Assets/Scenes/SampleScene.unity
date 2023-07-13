@@ -264,6 +264,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   power: 12
+  speededFallPower: 10
   rollTime: 0.7
   coinsTypeId: coin
   itemsLayer: 10
@@ -972,7 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkFactory: {fileID: 1398830130}
-  initialPoolSize: 10
+  initialPoolSize: 12
 --- !u!114 &1398830132
 MonoBehaviour:
   m_ObjectHideFlags: 0
