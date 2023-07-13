@@ -17,6 +17,7 @@ public class Character:MonoBehaviour
     [Header("Jump")]
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float power = 5;
+    [SerializeField] private float speededFallPower = 3;
     [Header("Roll")]
     [SerializeField] private float rollTime;
     [Header("Items")]
@@ -54,6 +55,7 @@ public class Character:MonoBehaviour
     public int TimesCanBeRevived { get => timesCanBeRevived; }  
 
     public LayerMask GroundLayers { get => groundLayers; }
+    public float SpeededFallPower { get => speededFallPower; }
     public float JumpPower { get => power; }
 
     public float RollTime { get => rollTime; }

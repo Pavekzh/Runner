@@ -69,7 +69,7 @@ public class LeaderboardController:MonoBehaviour
         foreach(PlayerLeaderboardEntry player in leaderboard)
         {
             GameObject record = recordsPool.Get();
-            record.GetComponent<LeaderboardRecord>().SetRecord(player.DisplayName, player.StatValue.ToString(),player.Position);
+            record.GetComponent<LeaderboardRecord>().SetRecord(player.DisplayName, player.StatValue.ToString(),player.Position + 1);
         }
     }
 
