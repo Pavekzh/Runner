@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RollState:RunState
 {
-    public RollState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
+    public RollState(CharacterModel character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     private Coroutine rollCoroutine;
 
@@ -29,20 +29,20 @@ public class RollState:RunState
         if (input.x == -1)
             ChangeLaneLeft();
         if (input.y == 1)
-            stateMachine.ChangeState(character.JumpState);
+            stateMachine.ChangeState<JumpState>();
     }
 
     public override void TriggerEnter(Collider trigger)
     {
         if (AddItem(trigger))
             return;
-        else if (trigger.gameObject.layer == character.LowerObstacleLayer)
+        else if (trigger.gameObject.tag == character.deathSettings.LowerObstacleTag)
             Death();
     }    
 
     protected void Roll()
     {
-        character.Animator.SetTrigger(character.RollTrigger);
+        character.Animator.SetTrigger(character.animationSettings.RollTrigger);
         rollCoroutine = character.StartCoroutine(RollTimer());
     }    
     
@@ -57,12 +57,12 @@ public class RollState:RunState
     
     private void EndRoll()
     {
-        stateMachine.ChangeState(character.RunState);
+        stateMachine.ChangeState<RunState>();
     }
 
     private IEnumerator RollTimer()
     {
-        yield return new WaitForSeconds(character.RollTime);
+        yield return new WaitForSeconds(character.rollSettings.RollTime);
 
         rollCoroutine = null;
         EndRoll();

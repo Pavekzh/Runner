@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RunState : BaseState
 {
-    public RunState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
+    public RunState(CharacterModel character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     protected int Lane
     {
@@ -14,7 +14,7 @@ public class RunState : BaseState
     public override void Enter()
     {
         Debug.Log("Run enter");
-        character.Animator.SetTrigger(character.RunTrigger);
+        character.Animator.SetTrigger(character.animationSettings.RunTrigger);
     }
 
     public override void Exit()
@@ -24,9 +24,9 @@ public class RunState : BaseState
 
     public override void Run()
     {
-        character.Speed += character.Acceleration * Time.deltaTime;
+        character.CurrentSpeed += character.moveSettings.Acceleration * Time.deltaTime;
 
-        Vector3 delta = character.MoveDirection * character.Speed * Time.deltaTime;
+        Vector3 delta = character.MoveDirection * character.CurrentSpeed * Time.deltaTime;
 
         character.transform.Translate(delta, Space.World);
     }
@@ -40,9 +40,9 @@ public class RunState : BaseState
         if (input.x == -1)
             ChangeLaneLeft();    
         if (input.y == 1)
-            stateMachine.ChangeState(character.JumpState);
+            stateMachine.ChangeState<JumpState>();
         if (input.y == -1)
-            stateMachine.ChangeState(character.RollState);
+            stateMachine.ChangeState<RollState>();
     }
 
     public override void Collision(Collision collision) { }
@@ -51,9 +51,9 @@ public class RunState : BaseState
     {
         if (AddItem(trigger))
             return;
-        else if (trigger.gameObject.layer == character.LowerObstacleLayer)
+        else if (trigger.tag == character.deathSettings.LowerObstacleTag)
             Death();
-        else if (trigger.gameObject.layer == character.UpperObstacleLayer)
+        else if (trigger.tag == character.deathSettings.UpperObstacleTag)
             Death();
         
     }
@@ -63,26 +63,26 @@ public class RunState : BaseState
     protected void Death()
     {
         StopLaneChanging();
-        stateMachine.ChangeState(character.DeathState);
+        stateMachine.ChangeState<DeathState>();
     }
 
     protected bool AddItem(Collider collider)
     {
-        if (collider.gameObject.layer == character.ItemsLayer)
+        if (collider.tag == character.itemsSettings.ItemsTag)
         {
             Item item = collider.gameObject.GetComponent<Item>();
             item.Collected();
             ItemData itemData = item.ItemData;
 
 
-            if (itemData.TypeId == character.CoinsTypeId)
+            if (itemData.Type == character.itemsSettings.CoinsType)
                 character.Coins += itemData.Count;
             else
             {
-                if (character.Items.ContainsKey(itemData.TypeId))
-                    character.Items[itemData.TypeId] += itemData.Count;
+                if (character.Items.ContainsKey(itemData.Type))
+                    character.Items[itemData.Type] += itemData.Count;
                 else
-                    character.Items.Add(itemData.TypeId, itemData.Count);
+                    character.Items.Add(itemData.Type, itemData.Count);
             }
 
             return true;
@@ -140,7 +140,7 @@ public class RunState : BaseState
         while (Mathf.Abs(character.transform.position.x - startingPos) < startingDelta)
         {
             Vector3 toLane = new Vector3(character.XPositions[Lane] - character.transform.position.x, 0, 0).normalized;
-            Vector3 delta = toLane * character.ChangingLaneSpeed * Time.deltaTime;
+            Vector3 delta = toLane * character.moveSettings.ChangingLaneSpeed * Time.deltaTime;
 
             character.transform.Translate(delta);
 

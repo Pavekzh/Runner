@@ -3,9 +3,14 @@
 [CreateAssetMenu(fileName ="Item",menuName = "ScriptableObjects/ItemData")]
 public class ItemData : ScriptableObject
 {
-    [SerializeField] private string typeId;
+    [SerializeField] private ItemType type;
     [SerializeField] private int count;
 
-    public string TypeId { get => typeId; }
+    public ItemType Type { get => type; }
     public int Count { get => count; }
+}
+
+public enum ItemType
+{
+    Coin
 }

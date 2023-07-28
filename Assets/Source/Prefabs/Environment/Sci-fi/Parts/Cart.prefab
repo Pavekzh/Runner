@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5783429377840970149}
   m_Layer: 6
   m_Name: Cart
-  m_TagString: Untagged
+  m_TagString: Lower obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6664239271832738773}
   m_Layer: 9
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

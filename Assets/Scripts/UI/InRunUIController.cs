@@ -12,9 +12,9 @@ public class InRunUIController:MonoBehaviour
     [SerializeField] private Button pauseButton;
 
     private ScoreCounter scoreCounter;
-    private Character character;
+    private CharacterModel character;
     
-    public void InitDependencies(ScoreCounter scoreCounter,Character character)
+    public void InitDependencies(ScoreCounter scoreCounter,CharacterModel character)
     {
         this.scoreCounter = scoreCounter;
         this.character = character;

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class DeathState:BaseState
 {
-    public DeathState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
+    public DeathState(CharacterModel character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     protected bool canBeRevived
     {
-        get => deathCount <= character.TimesCanBeRevived;
+        get => deathCount <= character.deathSettings.TimesCanBeRevived;
     }
 
     protected int deathCount { get; private set; } = 0;
@@ -38,8 +38,8 @@ public class DeathState:BaseState
     private void Revive()
     {        
         character.GameOverUI.OnRevive -= Revive;
-        character.Animator.SetTrigger(character.RunTrigger);
-        stateMachine.ChangeState(character.InvulnerableState);
+        character.Animator.SetTrigger(character.animationSettings.RunTrigger);
+        stateMachine.ChangeState<InvulnerableState>();
 
         character.InRunUI.Open();
         character.GameOverUI.Close();
@@ -48,7 +48,7 @@ public class DeathState:BaseState
     protected void Die()
     {
         deathCount++;        
-        character.Animator.SetTrigger(character.DieTrigger);
+        character.Animator.SetTrigger(character.animationSettings.DieTrigger);
 
         character.InRunUI.Close();
         character.GameOverUI.Open(character.ScoreCounter.Score, character.Coins, canBeRevived);

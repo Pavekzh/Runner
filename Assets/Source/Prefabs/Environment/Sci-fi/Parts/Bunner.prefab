@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 5841325004062944629}
   m_Layer: 7
   m_Name: Bunner
-  m_TagString: Untagged
+  m_TagString: Upper obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

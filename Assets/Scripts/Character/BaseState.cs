@@ -2,10 +2,10 @@
 
 public abstract class BaseState
 {
-    protected readonly Character character;
+    protected readonly CharacterModel character;
     protected readonly StateMachine stateMachine;
 
-    public BaseState(Character character,StateMachine stateMachine)
+    public BaseState(CharacterModel character,StateMachine stateMachine)
     {
         this.character = character;
         this.stateMachine = stateMachine;

@@ -2,7 +2,7 @@
 
 public class StandState : BaseState
 {
-    public StandState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
+    public StandState(CharacterModel character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     public override void Enter() 
     {
@@ -12,7 +12,7 @@ public class StandState : BaseState
     public override void Exit() 
     {
         Debug.Log("Stand exit");
-        character.Animator.SetTrigger(character.RunTrigger);
+        character.Animator.SetTrigger(character.animationSettings.RunTrigger);
         character.MenuUI.Close();
         character.InRunUI.Open();
     }
@@ -20,7 +20,7 @@ public class StandState : BaseState
     public override void HandleInput(InputDetector inputDetector)
     {
         if (inputDetector.CheckAnyInput())
-            stateMachine.ChangeState(character.RunState);
+            stateMachine.ChangeState<RunState>();
     }
     
     public override void Run() { }

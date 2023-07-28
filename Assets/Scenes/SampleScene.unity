@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 182302086}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,30 +252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0943159935f528f4b82ff5da05864851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftLaneOffset: -2
-  rightLaneOffset: 2
-  changingLaneSpeed: 10
-  speed: 6.5
-  acceleration: 0.07
-  lowerObstacleLayer: 6
-  upperObstacleLayer: 7
-  timesCanBeRevived: 1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 768
-  power: 12
-  speededFallPower: 10
-  rollTime: 0.7
-  coinsTypeId: coin
-  itemsLayer: 10
-  invulnerabilityTime: 3
-  invulnerableTo: 9
-  animator: {fileID: 5866666020852203765}
-  runTrigger: Run
-  jumpTrigger: Jump
-  rollTrigger: Roll
-  dieTrigger: Die
-  reviveTrigger: Revive
+  moveSettings: {fileID: 11400000, guid: 3a412aa673eac0e4290e4cbb0d4e2705, type: 2}
+  jumpSettings: {fileID: 11400000, guid: 3242fb1cb1abbf74cb3c7b065ffda2b5, type: 2}
+  rollSettings: {fileID: 11400000, guid: 4029bf047ce014e4caadacfc555dfa03, type: 2}
+  itemsSettings: {fileID: 11400000, guid: 098d6eb29faf98a478b30b7dcc31d837, type: 2}
+  deathSettings: {fileID: 11400000, guid: bda6fb31b65650c4a9a2f09b2dceaae0, type: 2}
+  invulnerabilitySettings: {fileID: 11400000, guid: 0d401eea8ffe54f48949b3f9179229b1, type: 2}
+  animationSettings: {fileID: 11400000, guid: 9df13ab5a55e7f84a8d976dc5b949635, type: 2}
 --- !u!1 &257005877
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdba17495faa0e40bd27415b23023f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDetector: {fileID: 1484653511}
+  inputDetector: {fileID: 1571176523}
   scoreCounter: {fileID: 309924961}
   worldGenerator: {fileID: 1398830132}
   playerProfile: {fileID: 338021636}
@@ -2146,11 +2129,6 @@ Transform:
   m_Father: {fileID: 8300532547493138553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5866666020852203765 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9166007199297105139, guid: 6d168d04214260d4a972ce4f93893f38, type: 3}
-  m_PrefabInstance: {fileID: 3341291945493720070}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7395294009535291889
 PrefabInstance:
   m_ObjectHideFlags: 0

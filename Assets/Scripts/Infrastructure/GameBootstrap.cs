@@ -10,7 +10,7 @@ class GameBootstrap:MonoBehaviour
     [SerializeField] SceneLoader sceneLoader;
 
     [Header("Character")]    
-    [SerializeField] Character character;
+    [SerializeField] CharacterModel character;
     [SerializeField] PauseController pause;
 
     [Header("UI")]    

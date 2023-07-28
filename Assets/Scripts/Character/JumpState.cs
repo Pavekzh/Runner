@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class JumpState:RunState
 {
-    public JumpState(Character character, StateMachine stateMachine) : base(character, stateMachine) { }
+    public JumpState(CharacterModel character, StateMachine stateMachine) : base(character, stateMachine) { }
 
     private bool jumpStarted = false;
     private bool downInput = false;
@@ -37,24 +37,20 @@ public class JumpState:RunState
         Debug.Log("Fall");
         downInput = true;
         character.Rigidbody.velocity = Vector3.zero;
-        character.Rigidbody.AddForce(Vector3.down * character.SpeededFallPower, ForceMode.VelocityChange);
+        character.Rigidbody.AddForce(Vector3.down * character.jumpSettings.SpeededFallPower, ForceMode.VelocityChange);
     }
 
     public override void Collision(Collision collision)
     {
         if (jumpStarted)
         {
-            LayerMask layerMask = character.GroundLayers;
-            int layer = collision.collider.gameObject.layer;
 
-            bool isColliderGround = layerMask == (layerMask | (1 << layer));
-
-            if (isColliderGround)
+            if (collision.collider.tag == character.jumpSettings.GroundTag)
             {
                 if (downInput)
-                    stateMachine.ChangeState(character.RollState);
+                    stateMachine.ChangeState<RollState>();
                 else
-                    stateMachine.ChangeState(character.RunState);
+                    stateMachine.ChangeState<RunState>();
 
                 jumpStarted = false;
             }
@@ -62,21 +58,16 @@ public class JumpState:RunState
     }
 
     public override void CollisionExit(Collision collision)
-    {
-        LayerMask layerMask = character.GroundLayers;
-        int layer = collision.collider.gameObject.layer;
-
-        bool isColliderGround = layerMask == (layerMask | (1 << layer));
-
-        if (isColliderGround)
+    {  
+        if (collision.collider.tag == character.jumpSettings.GroundTag)
             jumpStarted = true;
     }
 
     protected void Jump()
     {
         downInput = false;
-        character.Animator.SetTrigger(character.JumpTrigger);
-        character.Rigidbody.AddForce(Vector3.up * character.JumpPower, ForceMode.VelocityChange);
+        character.Animator.SetTrigger(character.animationSettings.JumpTrigger);
+        character.Rigidbody.AddForce(Vector3.up * character.jumpSettings.JumpPower, ForceMode.VelocityChange);
     }
 
 }

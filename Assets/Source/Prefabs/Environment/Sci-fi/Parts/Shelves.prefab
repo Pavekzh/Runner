@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8188119369705428200}
   m_Layer: 6
   m_Name: Lower obstacle
-  m_TagString: Untagged
+  m_TagString: Lower obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2382739396549966414}
   m_Layer: 7
   m_Name: Shelves
-  m_TagString: Untagged
+  m_TagString: Upper obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
